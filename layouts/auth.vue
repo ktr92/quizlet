@@ -1,17 +1,6 @@
 <template>
   <div :class='{"dark": darkMode}'>
-    <div class='min-h-screen dark:bg-gray-800'>
-      <Loading v-if='mainStore.loading' />
-
-      <Header />
-      
-      <div class='max-w-[1200px] mx-auto py-12'>
-        <NuxtPage/>
-      </div>
-      
-
-      <Footer />
-    </div>
+    <NuxtPage />
   </div>
 </template>
 
@@ -20,7 +9,6 @@
   const mainStore = useMainStore()
 
   const darkMode = ref(mainStore.dark)
-  
 </script>
 
 <style scoped>
