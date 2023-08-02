@@ -1,13 +1,38 @@
 <template>
   <div>
-    <div v-if="props.items && currentItem">
+    <div v-if="restItems && currentItem">
       <div v-if="isFinish">
-        <div class="text-lg text-center">Повторить неизученные термины?</div>
+        <div class="flex max-auto my-8">
+          <div class='mx-4'>
+            <UIButton
+              @onclick="restart"
+              size="sm"
+              :liquid="false"
+              :rounded="true"
+            >
+              Продолжить изучать термины
+         </UIBUtton>
+          </div>
+          <div class='mx-4'>
+          <UIButton
+              @onclick="learnmore"
+              size="sm"
+              :liquid="false"
+              :rounded="true"
+            >
+              Начать заново
+         </UIBUtton>
+        </div>
+        </div><!-- /.flex -->
+      
       </div>
       <div
         v-else
-        class="py-32 relative h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-lg overflow-hidden"
+       
       >
+      <div  class="py-32 relative h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-lg overflow-hidden">
+
+     
         <div
           v-if="!flipped"
           class="absolute text-center py-16 bg-white dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
@@ -24,14 +49,18 @@
         </div>
       </div>
 
-      <div class="flex py-8 xs-auto md:w-p[900px] items-center justify-center">
-        <button @click.prevent="makeknown" class="block mx-4">
-          <Icon name="gg:check-o" color="green" size="60px" />
-        </button>
-        <button @click.prevent="makeunknown" class="block mx-4">
-          <Icon name="gg:close-o" color="red" size="60px" />
-        </button>
+        <div class="flex py-8 xs-auto md:w-p[900px] items-center justify-center">
+          <button @click.prevent="makeknown" class="block mx-4">
+            <Icon name="gg:check-o" color="green" size="60px" />
+          </button>
+          <button @click.prevent="nextcard" class="block mx-4">
+            <Icon name="gg:close-o" color="red" size="60px" />
+          </button>
+        </div>
+        
       </div>
+
+      
     </div>
   </div>
 </template>
@@ -44,6 +73,9 @@ const props = defineProps({
   },
 })
 
+const restItems = ref(props.items)
+const initialItems = toRaw(props.items)
+
 const flipped = ref(false)
 const flip = () => {
   flipped.value = !flipped.value
@@ -51,11 +83,9 @@ const flip = () => {
 
 let current = ref(0)
 const isFinish = ref(false)
-const known = ref<ICard[]>([])
-const unknown = ref<ICard[]>([])
 
 const currentItem = computed(() => {
-  return props.items[current.value]
+  return restItems.value[current.value]
 })
 
 const nextcard = () => {
@@ -63,21 +93,30 @@ const nextcard = () => {
   flipped.value = false
 }
 
+
+const restart = () => {
+  current.value = 0
+  isFinish.value = false
+}
+
+const learnmore = () => {
+  restItems.value = initialItems
+  restart()
+
+}
+
 watch(current, (newValue, oldValue) => {
-  if (newValue >= props.items.length) {
+  if (newValue >= initialItems.length) {
     isFinish.value = true
     current.value = 0
   }
 })
 
 const makeknown = () => {
-  known.value.push(currentItem.value)
+  restItems.value.splice(current.value, 1)
   nextcard()
 }
-const makeunknown = () => {
-  unknown.value.push(currentItem.value)
-  nextcard()
-}
+
 </script>
 
 <style scoped>
