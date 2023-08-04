@@ -3,17 +3,7 @@
     @click.prevent="onClick"
     :disabled="props.disabled"
     :class="classes"
-    class="
-      text-white
-      focus:ring-4
-      focus:outline-none
-      font-medium
-      px-5
-      py-4
-      text-md text-center
-      cursor-pointer
-      whitespace-nowrap
-    "
+    class="text-white focus:ring-4 focus:outline-none font-medium px-5 py-4 text-md text-center cursor-pointer whitespace-nowrap min-w-[115px] md:min-w-[150px]"
   >
     <slot></slot>
   </button>
@@ -45,23 +35,26 @@ const props = defineProps({
 
 const emits = defineEmits(["onclick"])
 
+const { defaultTransition } = useTailwindConfig()
+
 enum ButtonSizes {
-  "xs" = "px-[10px] py-[6px]",
-  "sm" = "px-[15px] py-[10px]",
-  "md" = "py-3 px-3",
-  "lg" = "px-12 py-3",
+  "xs" = "px-[10px] py-1 md:py-[6px]",
+  "sm" = "px-[15px] py-1 md:py-[10px]",
+  "md" = "px-2 md:px-3 py-[8px] md:py-3",
+  "lg" = "px-2 md:px-12 py-[8px] md:py-3",
 }
 
 enum TextSizes {
   "xs" = "text-xs",
   "sm" = "text-sm",
-  "md" = "text-md",
-  "lg" = "text-lg",
+  "md" = "text-sm md:text-md",
+  "lg" = "text-md md:text-lg",
 }
 
 enum ButtonTypes {
-  "primary" = "bg-green hover:bg-blue-800 text-white",
-  "danger" = "bg-red-500 hover:bg-red-600",
+  "primary" = "bg-primary-600  text-white dark:bg-primary-500 hover:bg-primary-300",
+  "danger" = "bg-red-400  text-white dark:bg-red-400 hover:bg-red-600",
+  "clear" = "bg-gray-500 dark:bg-gray-200  text-white dark:bg-gray-500 hover:bg-red-600",
 }
 
 const paddingClasses = computed(() => {
@@ -83,7 +76,7 @@ const roundedClass = computed(() => {
 
 const classes = computed(
   () =>
-    `${paddingClasses.value} ${textClass.value} ${widthClass.value} ${roundedClass.value} ${typeClass.value}`
+    `${paddingClasses.value} ${textClass.value} ${widthClass.value} ${roundedClass.value} ${typeClass.value} ${defaultTransition}`
 )
 
 const onClick = (event: Event) => {

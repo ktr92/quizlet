@@ -1,16 +1,13 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia"
 
-export const useMainStore = defineStore('mainstore', {
+export const useMainStore = defineStore("mainstore", {
   state: () => ({
     loading: false,
-    dark: true,
-    user: false
+    dark: false,
+    user: false,
   }),
   getters: {
-    getLoading: (state) => state.loading
-   
+    getLoading: (state) => state.loading,
   },
-  actions: {
-   
-  },
+  actions: {},
 })

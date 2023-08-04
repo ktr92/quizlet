@@ -1,66 +1,101 @@
 <template>
   <div>
-    <div v-if="restItems && currentItem">
-      <div v-if="isFinish">
-        <div class="flex max-auto my-8">
-          <div class='mx-4'>
-            <UIButton
-              @onclick="restart"
-              size="sm"
-              :liquid="false"
-              :rounded="true"
-            >
-              Продолжить изучать термины
-         </UIBUtton>
-          </div>
-          <div class='mx-4'>
+    <div v-if="isFinish">
+      <div class="flex max-auto my-2 md:my-8 justify-center">
+        <div class="mx-2 md:mx-4">
           <UIButton
-              @onclick="learnmore"
+            @onclick="restart"
+            size="lg"
+            :liquid="false"
+            :rounded="true"
+            type="danger"
+          >
+            Начать заново
+          </UIButton>
+        </div>
+        <div class="mx-2 md:mx-4" v-if="restItems.length">
+          <UIButton
+            @onclick="learnmore"
+            size="lg"
+            :liquid="false"
+            :rounded="true"
+            type="primary"
+          >
+            Продолжить
+          </UIButton>
+        </div>
+      </div>
+      <!-- /.flex -->
+    </div>
+    <div v-else>
+      <div v-if="restItems && currentItem">
+        <div
+          class="flex max-auto my-2 md:my-8 justify-center dark:text-white text-xl items-center"
+        >
+          <div class="mx-2 md:mx-4">
+            {{ count + 1 }} / {{ initialItems.length }}
+          </div>
+        </div>
+        <div
+          class="flex max-auto my-2 md:my-8 justify-center text-white text-xl items-center"
+        >
+          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
+            <UIButton
+              @onclick="randomize"
               size="sm"
               :liquid="false"
               :rounded="true"
+              type="clear"
             >
-              Начать заново
-         </UIBUtton>
-        </div>
-        </div><!-- /.flex -->
-      
-      </div>
-      <div
-        v-else
-       
-      >
-      <div  class="py-32 relative h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-lg overflow-hidden">
-
-     
-        <div
-          v-if="!flipped"
-          class="absolute text-center py-16 bg-white dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
-          @click="flip"
-        >
-          <div class="text-5xl">{{ currentItem.dt }}</div>
+              Переставить термины
+            </UIButton>
+          </div>
         </div>
         <div
-          v-else
-          class="absolute text-center py-16 bg-gray-200 dark:bg-gray-700 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
-          @click="flip"
+          class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
         >
-          <div class="text-5xl">{{ currentItem.dd }}</div>
+          <div
+            v-if="!flipped"
+            class="absolute text-center py-16 bg-primary-500 dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
+            @click="flip"
+          >
+            <div class="text-lg md:text-5xl">{{ currentItem.dt }}</div>
+          </div>
+          <div
+            v-else
+            class="absolute text-center py-16 bg-gray-400 dark:bg-gray-700 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
+            @click="flip"
+          >
+            <div class="text-lg md:text-5xl">{{ currentItem.dd }}</div>
+          </div>
+        </div>
+
+        <div
+          class="flex py-8 xs-auto md:w-p[900px] items-center justify-center"
+        >
+          <UIButton
+            @onclick="nextcard"
+            size="lg"
+            :liquid="false"
+            :rounded="true"
+            type="danger"
+            class="mx-4"
+          >
+            Не знаю
+          </UIButton>
+
+          <UIButton
+            @onclick="makeknown"
+            size="lg"
+            :liquid="false"
+            :rounded="true"
+            type="primary"
+            class="mx-4"
+          >
+            Знаю
+          </UIButton>
         </div>
       </div>
-
-        <div class="flex py-8 xs-auto md:w-p[900px] items-center justify-center">
-          <button @click.prevent="makeknown" class="block mx-4">
-            <Icon name="gg:check-o" color="green" size="60px" />
-          </button>
-          <button @click.prevent="nextcard" class="block mx-4">
-            <Icon name="gg:close-o" color="red" size="60px" />
-          </button>
-        </div>
-        
-      </div>
-
-      
     </div>
   </div>
 </template>
@@ -73,8 +108,9 @@ const props = defineProps({
   },
 })
 
-const restItems = ref(props.items)
-const initialItems = toRaw(props.items)
+let restItems = [...props.items]
+const items = [...props.items]
+let initialItems = [...props.items]
 
 const flipped = ref(false)
 const flip = () => {
@@ -82,41 +118,53 @@ const flip = () => {
 }
 
 let current = ref(0)
+let count = ref(0)
 const isFinish = ref(false)
 
 const currentItem = computed(() => {
-  return restItems.value[current.value]
+  return restItems[current.value] ? restItems[current.value] : restItems[0]
 })
 
-const nextcard = () => {
-  current.value += 1
-  flipped.value = false
+const restart = () => {
+  restItems = [...items]
+  initialItems = [...items]
+  reinit()
 }
 
+const learnmore = () => {
+  initialItems = [...restItems]
+  reinit()
+}
 
-const restart = () => {
+const reinit = () => {
+  count.value = 0
   current.value = 0
   isFinish.value = false
 }
 
-const learnmore = () => {
-  restItems.value = initialItems
-  restart()
-
-}
-
-watch(current, (newValue, oldValue) => {
+watch(count, (newValue, oldValue) => {
   if (newValue >= initialItems.length) {
     isFinish.value = true
     current.value = 0
+    count.value = 0
   }
 })
 
-const makeknown = () => {
-  restItems.value.splice(current.value, 1)
-  nextcard()
+const nextcard = () => {
+  current.value += 1
+  count.value += 1
+  flipped.value = false
 }
 
+const makeknown = () => {
+  restItems.splice(current.value, 1)
+  count.value += 1
+}
+
+const randomize = () => {
+  restItems = useShuffle(restItems)
+  reinit()
+}
 </script>
 
 <style scoped>
