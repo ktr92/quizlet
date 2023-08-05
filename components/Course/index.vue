@@ -1,13 +1,37 @@
 <template>
   <div>
-    <div class="flex items-center justify-center flex-wrap">
-      <UIIconlink title="Карточки" icon="" @click="showCards"></UIIconlink>
-      <UIIconlink title="Запоминание" icon="" @click="showLearn"></UIIconlink>
-      <UIIconlink title="Тест" icon="" @click="showTests"></UIIconlink>
-    </div>
+    <div class="max-w-[800px] m-auto">
+      <div class="flex items-center justify-center flex-wrap">
+        <UIIconlink
+          title="Карточки"
+          icon=""
+          @click="showCards"
+          class="flex-1"
+          :is-active="iscomponent === 'cards'"
+        ></UIIconlink>
+        <UIIconlink
+          title="Запоминание"
+          icon=""
+          @click="showLearn"
+          class="flex-1"
+          :is-active="iscomponent === 'learn'"
+        ></UIIconlink>
+        <UIIconlink
+          title="Тест"
+          icon=""
+          @click="showTests"
+          class="flex-1"
+          :is-active="iscomponent === 'tests'"
+        ></UIIconlink>
+      </div>
 
-    <div>
-      <component :is="courseComponent" :items="course" :key="count"></component>
+      <div>
+        <component
+          :is="courseComponent"
+          :items="course"
+          :key="count"
+        ></component>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +79,7 @@ const course = [
 ]
 
 const showCards = () => {
-  iscomponent.value = "cars"
+  iscomponent.value = "cards"
   count.value += 1
 }
 const showLearn = () => {

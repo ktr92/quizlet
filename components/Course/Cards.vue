@@ -36,32 +36,7 @@
             {{ count + 1 }} / {{ initialItems.length }}
           </div>
         </div>
-        <div
-          class="flex max-auto my-2 md:my-8 justify-center text-white text-xl items-center"
-        >
-          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
-            <UIButton
-              @onclick="randomize"
-              size="sm"
-              :liquid="false"
-              :rounded="true"
-              type="clear"
-            >
-              Переставить термины
-            </UIButton>
-          </div>
-          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
-            <UIButton
-              @onclick="changeSide"
-              size="sm"
-              :liquid="false"
-              :rounded="true"
-              type="clear"
-            >
-              {{ side }}
-            </UIButton>
-          </div>
-        </div>
+
         <div
           class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
         >
@@ -84,32 +59,38 @@
             </div>
           </div>
         </div>
-
-        <div
-          class="flex py-2 md:py-8 xs-auto md:w-p[900px] items-center justify-center"
-        >
-          <UIButton
-            @onclick="nextcard"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="danger"
-            class="mx-1 md:mx-4 w-[50%]"
+        <div class="flex justify-between">
+          <div
+            class="flex max-auto my-2 md:my-8 justify-center text-white text-xl items-center"
           >
-            Не знаю
-          </UIButton>
+            <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
+              <UIIconbutton @some-event="randomize">
+                <Icon name="uil:arrow-random" size="30" />
+              </UIIconbutton>
+            </div>
+            <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
+              <UIIconbutton @some-event="changeSide">
+                <Icon name="eva:flip-2-fill" size="30" />
+              </UIIconbutton>
+            </div>
+          </div>
 
-          <UIButton
-            @onclick="makeknown"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="primary"
-            class="mx-1 md:mx-4 w-[50%]"
+          <div
+            class="flex py-2 md:py-8 xs-auto md:w-p[900px] items-center justify-center"
           >
-            Знаю
-          </UIButton>
+            <div class="ml-1 md:ml-4 w-[50%]">
+              <UIIconbutton @some-event="nextcard" bg="#efadad" bghover="">
+                <Icon name="gg:close" size="30" />
+              </UIIconbutton>
+            </div>
+            <div class="ml-1 md:ml-4 w-[50%]">
+              <UIIconbutton @some-event="makeknown" bg="#c4eac4" bghover="">
+                <Icon name="heroicons-solid:check" size="30" />
+              </UIIconbutton>
+            </div>
+          </div>
         </div>
+        <!-- /.flex -->
       </div>
     </div>
   </div>
@@ -122,6 +103,9 @@ const props = defineProps({
     required: true,
   },
 })
+
+import { useMainStore } from "@/stores/mainstore"
+const mainStore = useMainStore()
 
 let restItems = [...props.items]
 const items = [...props.items]

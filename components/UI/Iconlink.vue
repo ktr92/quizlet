@@ -1,7 +1,8 @@
 <template>
   <div class="m-1 md:m-4">
     <div
-      class="rounded shadow-lg font-bold px-2 md:px-8 py-3 inline-flex items-center justify-center bg-white dark:bg-gray-600 cursor-pointer min-w-[67px] text-center"
+      class="rounded shadow text-white font-bold px-2 md:px-8 py-3 inline-flex items-center justify-center bg-gray-400 dark:bg-gray-600 cursor-pointer min-w-[67px] w-full text-center hover:shadow-xl"
+      :class="[defaultTransition, { active: isActive }]"
     >
       <div class="block mr-2 max-w-[30px]" v-if="props.icon">
         {{ props.icon }}
@@ -23,7 +24,20 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
 })
+const { defaultTransition } = useTailwindConfig()
 </script>
 
-<style scoped></style>
+<style scoped>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+  @apply bg-gray-600;
+}
+</style>

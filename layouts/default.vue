@@ -5,7 +5,7 @@
 
       <Header />
 
-      <div class="max-w-[1200px] w-full px-2 mx-auto my-8 md:my-12">
+      <div class="max-w-[1200px] w-full px-2 mx-auto my-2 md:my-4">
         <NuxtPage />
       </div>
 
@@ -21,4 +21,12 @@ const mainStore = useMainStore()
 const darkMode = ref(mainStore.dark)
 </script>
 
-<style scoped></style>
+<style>
+svg.icon path {
+  fill: #9ca3af;
+}
+
+.dark svg.icon path {
+  fill: #5f99f7;
+}
+</style>
