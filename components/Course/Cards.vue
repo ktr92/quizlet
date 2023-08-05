@@ -86,7 +86,7 @@
         </div>
 
         <div
-          class="flex py-8 xs-auto md:w-p[900px] items-center justify-center"
+          class="flex py-2 md:py-8 xs-auto md:w-p[900px] items-center justify-center"
         >
           <UIButton
             @onclick="nextcard"
@@ -94,7 +94,7 @@
             :liquid="false"
             :rounded="true"
             type="danger"
-            class="mx-4"
+            class="mx-1 md:mx-4 w-[50%]"
           >
             Не знаю
           </UIButton>
@@ -105,7 +105,7 @@
             :liquid="false"
             :rounded="true"
             type="primary"
-            class="mx-4"
+            class="mx-1 md:mx-4 w-[50%]"
           >
             Знаю
           </UIButton>

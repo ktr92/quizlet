@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center flex-wrap">
       <UIIconlink title="Карточки" icon="" @click="showCards"></UIIconlink>
       <UIIconlink title="Запоминание" icon="" @click="showLearn"></UIIconlink>
       <UIIconlink title="Тест" icon="" @click="showTests"></UIIconlink>

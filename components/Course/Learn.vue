@@ -21,7 +21,7 @@
             :rounded="true"
             type="primary"
           >
-            Повторить ошибочные
+            Повторить
           </UIButton>
         </div>
       </div>
@@ -30,14 +30,14 @@
     <div v-else>
       <div v-if="restItems && restItems.length && currentItem">
         <div
-          class="flex max-auto my-2 md:my-8 justify-center dark:text-white text-xl items-center"
+          class="flex max-auto my-4 md:my-8 justify-center dark:text-white text-xl items-center"
         >
           <div class="mx-2 md:mx-4">
             {{ count + 1 }} / {{ restItems.length }}
           </div>
         </div>
         <div
-          class="flex max-auto my-2 md:my-8 justify-center text-white text-xl items-center"
+          class="flex max-auto my-4 md:my-8 justify-center text-white text-xl items-center"
         >
           <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
             <UIButton
@@ -66,7 +66,7 @@
           class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500"
         >
           <div
-            class="flex items-center justify-center text-5xl font-bold pb-8 text-white"
+            class="flex items-center justify-center text-xl md:text-5xl font-bold pb-8 text-white"
           >
             {{ currentItemDT }}
           </div>
@@ -75,7 +75,7 @@
           </div>
           <div
             v-if="!isvalid && answered"
-            class="text-red-800 mt-4 font-bold text-3xl text-center"
+            class="text-red-800 mt-4 font-bold text-lg md:text-3xl text-center"
           >
             {{ currentItemDD }}
           </div>
@@ -89,7 +89,7 @@
             :liquid="false"
             :rounded="true"
             type="danger"
-            class="mx-4"
+            class="mx-1 md:mx-4 w-[50%]"
           >
             Пропустить
           </UIButton>
@@ -100,7 +100,7 @@
             :liquid="false"
             :rounded="true"
             type="primary"
-            class="mx-4"
+            class="mx-1 md:mx-4 w-[50%]"
           >
             Далее
           </UIButton>

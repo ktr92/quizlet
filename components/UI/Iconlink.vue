@@ -1,7 +1,7 @@
 <template>
-  <div class="m-4">
+  <div class="m-1 md:m-4">
     <div
-      class="rounded shadow-lg font-bold px-8 py-3 inline-flex items-center bg-white dark:bg-dim-600 cursor-pointer"
+      class="rounded shadow-lg font-bold px-2 md:px-8 py-3 inline-flex items-center justify-center bg-white dark:bg-gray-600 cursor-pointer min-w-[67px] text-center"
     >
       <div class="block mr-2 max-w-[30px]" v-if="props.icon">
         {{ props.icon }}
