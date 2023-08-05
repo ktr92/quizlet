@@ -21,7 +21,7 @@
             :rounded="true"
             type="primary"
           >
-            Продолжить
+            Повторить ошибочные
           </UIButton>
         </div>
       </div>
@@ -50,6 +50,17 @@
               Переставить термины
             </UIButton>
           </div>
+          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
+            <UIButton
+              @onclick="changeSide"
+              size="sm"
+              :liquid="false"
+              :rounded="true"
+              type="clear"
+            >
+              {{ side }}
+            </UIButton>
+          </div>
         </div>
         <div
           class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
@@ -59,14 +70,18 @@
             class="absolute text-center py-16 bg-primary-500 dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
             @click="flip"
           >
-            <div class="text-lg md:text-5xl">{{ currentItem.dt }}</div>
+            <div class="text-lg md:text-5xl">
+              {{ currentItemDT }}
+            </div>
           </div>
           <div
             v-else
             class="absolute text-center py-16 bg-gray-400 dark:bg-gray-700 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
             @click="flip"
           >
-            <div class="text-lg md:text-5xl">{{ currentItem.dd }}</div>
+            <div class="text-lg md:text-5xl">
+              {{ currentItemDD }}
+            </div>
           </div>
         </div>
 
@@ -112,6 +127,8 @@ let restItems = [...props.items]
 const items = [...props.items]
 let initialItems = [...props.items]
 
+let frontSide = ref(true)
+
 const flipped = ref(false)
 const flip = () => {
   flipped.value = !flipped.value
@@ -121,19 +138,37 @@ let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
 
-const currentItem = computed(() => {
+let currentItem = ref<ICard>({ ...restItems[0] })
+
+const changeSide = () => {
+  frontSide.value = !frontSide.value
+}
+
+const side = computed(() => {
+  return frontSide.value ? "Термин" : "Определение"
+})
+
+/* const currentItem = computed(() => {
   return restItems[current.value] ? restItems[current.value] : restItems[0]
+}) */
+const currentItemDT = computed(() => {
+  return frontSide.value ? currentItem.value.dt : currentItem.value.dd
+})
+const currentItemDD = computed(() => {
+  return frontSide.value ? currentItem.value.dd : currentItem.value.dt
 })
 
 const restart = () => {
   restItems = [...items]
   initialItems = [...items]
   reinit()
+  changeCurrent()
 }
 
 const learnmore = () => {
   initialItems = [...restItems]
   reinit()
+  changeCurrent()
 }
 
 const reinit = () => {
@@ -154,10 +189,18 @@ const nextcard = () => {
   current.value += 1
   count.value += 1
   flipped.value = false
+  changeCurrent()
+}
+
+const changeCurrent = () => {
+  currentItem.value = restItems[current.value]
+    ? restItems[current.value]
+    : restItems[0]
 }
 
 const makeknown = () => {
   restItems.splice(current.value, 1)
+  changeCurrent()
   count.value += 1
 }
 
