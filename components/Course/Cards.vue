@@ -30,19 +30,11 @@
     <div v-else>
       <div v-if="restItems && currentItem">
         <div
-          class="flex max-auto my-2 md:my-8 justify-center dark:text-white text-xl items-center"
-        >
-          <div class="mx-2 md:mx-4">
-            {{ count + 1 }} / {{ initialItems.length }}
-          </div>
-        </div>
-
-        <div
-          class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-8 mb-8 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
+          class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-4 mb-4 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
         >
           <div
             v-if="!flipped"
-            class="absolute text-center py-16 bg-primary-500 dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
+            class="absolute text-center py-16 bg-primary-500 dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard w-full mx-auto flex items-center justify-center"
             @click="flip"
           >
             <div class="text-lg md:text-5xl">
@@ -51,7 +43,7 @@
           </div>
           <div
             v-else
-            class="absolute text-center py-16 bg-gray-400 dark:bg-gray-700 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard md:w-[900px] mx-auto flex items-center justify-center"
+            class="absolute text-center py-16 bg-gray-400 dark:bg-gray-700 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard w-full mx-auto flex items-center justify-center"
             @click="flip"
           >
             <div class="text-lg md:text-5xl">
@@ -59,9 +51,9 @@
             </div>
           </div>
         </div>
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
           <div
-            class="flex max-auto my-2 md:my-8 justify-center text-white text-xl items-center"
+            class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
           >
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
               <UIIconbutton @some-event="randomize">
@@ -76,7 +68,15 @@
           </div>
 
           <div
-            class="flex py-2 md:py-8 xs-auto md:w-p[900px] items-center justify-center"
+            class="flex max-auto my-2 md:my-2 justify-center dark:text-white text-xl items-center"
+          >
+            <div class="mx-2 md:mx-4">
+              {{ count + 1 }} / {{ initialItems.length }}
+            </div>
+          </div>
+
+          <div
+            class="flex py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-center"
           >
             <div class="ml-1 md:ml-4 w-[50%]">
               <UIIconbutton @some-event="nextcard" bg="#efadad" bghover="">
@@ -189,7 +189,7 @@ const makeknown = () => {
 }
 
 const randomize = () => {
-  restItems = useShuffle(restItems)
+  restItems = useShuffle([...restItems])
   reinit()
 }
 </script>

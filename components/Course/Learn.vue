@@ -36,32 +36,7 @@
             {{ count + 1 }} / {{ restItems.length }}
           </div>
         </div>
-        <div
-          class="flex max-auto my-4 md:my-8 justify-center text-white text-xl items-center"
-        >
-          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
-            <UIButton
-              @onclick="randomize"
-              size="sm"
-              :liquid="false"
-              :rounded="true"
-              type="clear"
-            >
-              Переставить термины
-            </UIButton>
-          </div>
-          <div class="mx-2 md:mx-4" v-if="initialItems.length > 1">
-            <UIButton
-              @onclick="changeSide"
-              size="sm"
-              :liquid="false"
-              :rounded="true"
-              type="clear"
-            >
-              {{ side }}
-            </UIButton>
-          </div>
-        </div>
+
         <div
           class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500"
         >
@@ -80,30 +55,45 @@
             {{ currentItemDD }}
           </div>
         </div>
-        <div
-          class="flex py-8 xs-auto md:w-p[900px] items-center justify-center"
-        >
-          <UIButton
-            @onclick="skipcard"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="danger"
-            class="mx-1 md:mx-4 w-[50%]"
-          >
-            Пропустить
-          </UIButton>
 
-          <UIButton
-            @onclick="nextcard"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="primary"
-            class="mx-1 md:mx-4 w-[50%]"
+        <div class="flex justify-between items-center">
+          <div
+            class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
           >
-            Далее
-          </UIButton>
+            <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
+              <UIIconbutton @some-event="randomize">
+                <Icon name="uil:arrow-random" size="30" />
+              </UIIconbutton>
+            </div>
+            <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
+              <UIIconbutton @some-event="changeSide">
+                <Icon name="eva:flip-2-fill" size="30" />
+              </UIIconbutton>
+            </div>
+          </div>
+
+          <div
+            class="flex max-auto my-2 md:my-2 justify-center dark:text-white text-xl items-center"
+          >
+            <div class="mx-2 md:mx-4">
+              {{ count + 1 }} / {{ initialItems.length }}
+            </div>
+          </div>
+
+          <div
+            class="flex py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-center"
+          >
+            <div class="ml-1 md:ml-4 w-[50%]">
+              <UIIconbutton @some-event="skipcard" bg="#efadad" bghover="">
+                <Icon name="fluent:skip-forward-tab-24-regular" size="30" />
+              </UIIconbutton>
+            </div>
+            <div class="ml-1 md:ml-4 w-[50%]">
+              <UIIconbutton @some-event="nextcard" bg="#c4eac4" bghover="">
+                <Icon name="heroicons-solid:check" size="30" />
+              </UIIconbutton>
+            </div>
+          </div>
         </div>
       </div>
     </div>

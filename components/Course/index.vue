@@ -1,26 +1,26 @@
 <template>
   <div>
     <div class="max-w-[800px] m-auto">
-      <div class="flex items-center justify-center flex-wrap">
+      <div class="flex items-center justify-center flex-wrap my-8">
         <UIIconlink
           title="Карточки"
           icon=""
           @click="showCards"
-          class="flex-1"
+          class="flex-1 mr-1 md:mr-4"
           :is-active="iscomponent === 'cards'"
         ></UIIconlink>
         <UIIconlink
           title="Запоминание"
           icon=""
           @click="showLearn"
-          class="flex-1"
+          class="flex-1 mx-1 md:mx-4"
           :is-active="iscomponent === 'learn'"
         ></UIIconlink>
         <UIIconlink
           title="Тест"
           icon=""
           @click="showTests"
-          class="flex-1"
+          class="flex-1 ml-1 md:ml-4"
           :is-active="iscomponent === 'tests'"
         ></UIIconlink>
       </div>
