@@ -107,7 +107,7 @@ const props = defineProps({
 import { useMainStore } from "@/stores/mainstore"
 const mainStore = useMainStore()
 
-let restItems = [...props.items]
+let restItems = ref([...props.items])
 const items = [...props.items]
 let initialItems = [...props.items]
 
@@ -122,8 +122,8 @@ let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
 
-let currentItem = ref<ICard>({ ...restItems[0] })
-
+/* let currentItem = ref<ICard>({ ...restItems.value[0] })
+ */
 const changeSide = () => {
   frontSide.value = !frontSide.value
 }
@@ -132,9 +132,11 @@ const side = computed(() => {
   return frontSide.value ? "Термин" : "Определение"
 })
 
-/* const currentItem = computed(() => {
-  return restItems[current.value] ? restItems[current.value] : restItems[0]
-}) */
+const currentItem = computed(() => {
+  return restItems.value[current.value]
+    ? restItems.value[current.value]
+    : restItems.value[0]
+})
 const currentItemDT = computed(() => {
   return frontSide.value ? currentItem.value.dt : currentItem.value.dd
 })
@@ -143,16 +145,16 @@ const currentItemDD = computed(() => {
 })
 
 const restart = () => {
-  restItems = [...items]
+  restItems.value = [...items]
   initialItems = [...items]
   reinit()
-  changeCurrent()
+  /*  changeCurrent() */
 }
 
 const learnmore = () => {
-  initialItems = [...restItems]
+  initialItems = [...restItems.value]
   reinit()
-  changeCurrent()
+  /*  changeCurrent() */
 }
 
 const reinit = () => {
@@ -173,30 +175,30 @@ const nextcard = () => {
   current.value += 1
   count.value += 1
   flipped.value = false
-  changeCurrent()
+  /*  changeCurrent() */
 }
 
-const changeCurrent = () => {
-  currentItem.value = restItems[current.value]
-    ? restItems[current.value]
-    : restItems[0]
-}
+/* const changeCurrent = () => {
+  currentItem.value = restItems.value[current.value]
+    ? restItems.value[current.value]
+    : restItems.value[0]
+} */
 
 const makeknown = () => {
-  restItems.splice(current.value, 1)
-  changeCurrent()
+  restItems.value.splice(current.value, 1)
+  /*  changeCurrent() */
   count.value += 1
 }
 
 const randomize = () => {
-  restItems = useShuffle([...restItems])
+  restItems.value = useShuffle([...restItems.value])
   reinit()
 }
 </script>
 
 <style scoped>
 .animated {
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: both;
 }
 @keyframes flipInX {

@@ -76,6 +76,18 @@ const course = [
     dt: "insurance",
     dd: "страхование",
   },
+  {
+    dt: "have got",
+    dd: "имеется",
+  },
+  {
+    dt: "come down on",
+    dd: "наброситься",
+  },
+  {
+    dt: "come with",
+    dd: "ладить",
+  },
 ]
 
 const showCards = () => {

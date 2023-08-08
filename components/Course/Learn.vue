@@ -30,15 +30,7 @@
     <div v-else>
       <div v-if="restItems && restItems.length && currentItem">
         <div
-          class="flex max-auto my-4 md:my-8 justify-center dark:text-white text-xl items-center"
-        >
-          <div class="mx-2 md:mx-4">
-            {{ count + 1 }} / {{ restItems.length }}
-          </div>
-        </div>
-
-        <div
-          class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500"
+          class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500 mt-4 mb-4"
         >
           <div
             class="flex items-center justify-center text-xl md:text-5xl font-bold pb-8 text-white"
@@ -110,7 +102,7 @@ const props = defineProps({
 
 const answer = ref("")
 
-let restItems = [...props.items]
+let restItems = ref([...props.items])
 const items = [...props.items]
 let initialItems = [...props.items]
 let wrongAnswers = ref<ICard[]>([])
@@ -127,8 +119,8 @@ let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
 
-let currentItem = ref<ICard>({ ...restItems[0] })
-
+/* let currentItem = ref<ICard>({ ...restItems.value[0] })
+ */
 const changeSide = () => {
   frontSide.value = !frontSide.value
 }
@@ -137,9 +129,11 @@ const side = computed(() => {
   return frontSide.value ? "Термин" : "Определение"
 })
 
-/* const currentItem = computed(() => {
-  return restItems[current.value] ? restItems[current.value] : restItems[0]
-}) */
+const currentItem = computed(() => {
+  return restItems.value[current.value]
+    ? restItems.value[current.value]
+    : restItems.value[0]
+})
 const currentItemDT = computed(() => {
   return frontSide.value ? currentItem.value.dt : currentItem.value.dd
 })
@@ -148,17 +142,17 @@ const currentItemDD = computed(() => {
 })
 
 const restart = () => {
-  restItems = [...items]
+  restItems.value = [...items]
   initialItems = [...items]
   reinit()
-  changeCurrent()
+  /*   changeCurrent() */
 }
 
 const learnmore = () => {
-  restItems = [...wrongAnswers.value]
+  restItems.value = [...wrongAnswers.value]
   wrongAnswers.value = []
   reinit()
-  changeCurrent()
+  /*  changeCurrent() */
 }
 
 const reinit = () => {
@@ -168,7 +162,7 @@ const reinit = () => {
 }
 
 watch(count, (newValue, oldValue) => {
-  if (newValue >= initialItems.length || !restItems.length) {
+  if (newValue >= initialItems.length || !restItems.value.length) {
     isFinish.value = true
     current.value = 0
     count.value = 0
@@ -201,20 +195,20 @@ const skipcard = () => {
   answered.value = false
 }
 
-const changeCurrent = () => {
-  currentItem.value = restItems[current.value]
-    ? restItems[current.value]
-    : restItems[0] || {}
-}
+/* const changeCurrent = () => {
+  currentItem.value = restItems.value[current.value]
+    ? restItems.value[current.value]
+    : restItems.value[0] || {}
+} */
 
 const makeknown = () => {
-  restItems.splice(current.value, 1)
-  changeCurrent()
-  count.value += 1
+  restItems.value.splice(current.value, 1)
+  /*   changeCurrent()
+   */ count.value += 1
 }
 
 const randomize = () => {
-  restItems = useShuffle(restItems)
+  restItems.value = useShuffle(restItems.value)
   reinit()
 }
 </script>
