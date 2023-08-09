@@ -1,31 +1,13 @@
 <template>
   <div>
     <div v-if="isFinish">
-      <div class="flex max-auto my-2 md:my-8 justify-center">
-        <div class="mx-2 md:mx-4">
-          <UIButton
-            @onclick="restart"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="danger"
-          >
-            Начать заново
-          </UIButton>
-        </div>
-        <div class="mx-2 md:mx-4" v-if="wrongAnswers.length">
-          <UIButton
-            @onclick="learnmore"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="primary"
-          >
-            Повторить
-          </UIButton>
-        </div>
-      </div>
-      <!-- /.flex -->
+      <CourseNavigation
+        :condition2="wrongAnswers.length"
+        @some-event1="restart"
+        @some-event2="learnmore"
+        text1="Начать заново"
+        text2="Повторить"
+      />
     </div>
     <div v-else>
       <div v-if="restItems && restItems.length && currentItem">
@@ -33,7 +15,7 @@
           class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500 mt-4 mb-4"
         >
           <div
-            class="flex items-center justify-center text-xl md:text-5xl font-bold pb-8 text-white"
+            class="flex items-center justify-center text-lg md:text-3xl font-bold pb-8 text-white"
           >
             {{ currentItemDT }}
           </div>
@@ -111,23 +93,14 @@ let frontSide = ref(false)
 let answered = ref(false)
 
 const flipped = ref(false)
-const flip = () => {
-  flipped.value = !flipped.value
-}
 
 let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
 
-/* let currentItem = ref<ICard>({ ...restItems.value[0] })
- */
 const changeSide = () => {
   frontSide.value = !frontSide.value
 }
-
-const side = computed(() => {
-  return frontSide.value ? "Термин" : "Определение"
-})
 
 const currentItem = computed(() => {
   return restItems.value[current.value]
@@ -145,14 +118,13 @@ const restart = () => {
   restItems.value = [...items]
   initialItems = [...items]
   reinit()
-  /*   changeCurrent() */
 }
 
 const learnmore = () => {
   restItems.value = [...wrongAnswers.value]
   wrongAnswers.value = []
+  initialItems = [...restItems.value]
   reinit()
-  /*  changeCurrent() */
 }
 
 const reinit = () => {
@@ -194,12 +166,6 @@ const skipcard = () => {
   makeknown()
   answered.value = false
 }
-
-/* const changeCurrent = () => {
-  currentItem.value = restItems.value[current.value]
-    ? restItems.value[current.value]
-    : restItems.value[0] || {}
-} */
 
 const makeknown = () => {
   restItems.value.splice(current.value, 1)

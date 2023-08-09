@@ -1,31 +1,13 @@
 <template>
   <div>
     <div v-if="isFinish">
-      <div class="flex max-auto my-2 md:my-8 justify-center">
-        <div class="mx-2 md:mx-4">
-          <UIButton
-            @onclick="restart"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="danger"
-          >
-            Начать заново
-          </UIButton>
-        </div>
-        <div class="mx-2 md:mx-4" v-if="restItems.length">
-          <UIButton
-            @onclick="learnmore"
-            size="lg"
-            :liquid="false"
-            :rounded="true"
-            type="primary"
-          >
-            Повторить ошибочные
-          </UIButton>
-        </div>
-      </div>
-      <!-- /.flex -->
+      <CourseNavigation
+        :condition2="restItems.length"
+        @some-event1="restart"
+        @some-event2="learnmore"
+        text1="Начать заново"
+        text2="Повторить"
+      />
     </div>
     <div v-else>
       <div v-if="restItems && currentItem">
@@ -122,8 +104,6 @@ let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
 
-/* let currentItem = ref<ICard>({ ...restItems.value[0] })
- */
 const changeSide = () => {
   frontSide.value = !frontSide.value
 }
@@ -148,13 +128,11 @@ const restart = () => {
   restItems.value = [...items]
   initialItems = [...items]
   reinit()
-  /*  changeCurrent() */
 }
 
 const learnmore = () => {
   initialItems = [...restItems.value]
   reinit()
-  /*  changeCurrent() */
 }
 
 const reinit = () => {
@@ -175,14 +153,7 @@ const nextcard = () => {
   current.value += 1
   count.value += 1
   flipped.value = false
-  /*  changeCurrent() */
 }
-
-/* const changeCurrent = () => {
-  currentItem.value = restItems.value[current.value]
-    ? restItems.value[current.value]
-    : restItems.value[0]
-} */
 
 const makeknown = () => {
   restItems.value.splice(current.value, 1)
