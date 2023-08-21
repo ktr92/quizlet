@@ -8,9 +8,13 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/color-mode": "^3.3.0",
+    "@nuxtjs/supabase": "^1.0.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^18.17.1",
     "nuxt": "^3.6.5"

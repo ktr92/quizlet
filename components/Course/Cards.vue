@@ -2,7 +2,7 @@
   <div>
     <div v-if="isFinish">
       <CourseNavigation
-        :condition2="restItems.length"
+        :condition2="!!restItems.length"
         @some-event1="restart"
         @some-event2="learnmore"
         text1="Начать заново"
@@ -12,7 +12,7 @@
     <div v-else>
       <div v-if="restItems && currentItem">
         <div
-          class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-4 mb-4 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg overflow-hidden"
+          class="py-24 md:py-32 relative h-auto min-h-24 md:h-96 mx-auto mt-4 mb-4 cursor-pointer text-center font-bold tracking-light text-sm md:text-lg"
         >
           <div
             v-if="!flipped"
