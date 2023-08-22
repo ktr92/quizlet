@@ -9,3 +9,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Courses {
+  course_id          Int          @id @default(autoincrement())
+  course_user        String       @db.Uuid
+  course_title       String
+  course_description String
+  course_tags        Tags[]
+  course_items       CourseItem[]
+}
+
+model CourseItem {
+  courseitem_id      Int     @id @default(autoincrement())
+  course_id          Int
+  courseitem_courses Courses @relation(fields: [course_id], references: [course_id])
+  couesritem_words   Words[]
+}
+
+model Words {
+  word_id       Int        @id @default(autoincrement())
+  word_dt       String
+  word_dd       String
+  courseitem_id Int
+  course        CourseItem @relation(fields: [courseitem_id], references: [courseitem_id])
+}
+
+model Tags {
+  tag_id           Int     @id @default(autoincrement())
+  tag_title        String
+  Courses          Courses @relation(fields: [coursesCourse_id], references: [course_id])
+  coursesCourse_id Int
+}

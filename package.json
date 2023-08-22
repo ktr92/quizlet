@@ -6,9 +6,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "prisma": {
+    "postinstall": "nuxt prepare",
     "seed": "node prisma/seed.js"
   },
   "devDependencies": {
@@ -17,11 +15,13 @@
     "@nuxtjs/supabase": "^1.0.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^18.17.1",
-    "nuxt": "^3.6.5"
+    "nuxt": "^3.6.5",
+    "prisma": "^5.1.1"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia/nuxt": "^0.4.11",
+    "@prisma/client": "^5.1.1",
     "nuxt-icon": "^0.4.2",
     "nuxt-lodash": "^2.5.0",
     "pinia": "^2.1.6"
