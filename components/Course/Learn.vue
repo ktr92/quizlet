@@ -2,7 +2,7 @@
   <div>
     <div v-if="isFinish">
       <CourseNavigation
-        :condition2="wrongAnswers.length"
+        :condition2="!!wrongAnswers.length"
         @some-event1="restart"
         @some-event2="learnmore"
         text1="Начать заново"

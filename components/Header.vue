@@ -20,11 +20,34 @@
           </NuxtLink>
           <div class="flex items-center lg:order-2">
             <NuxtLink
+              v-if="!user"
               :class="defaultTransition"
-              to="/auth"
+              to="/login"
               class="text-white bg-[#423ed8] hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
               >Log in</NuxtLink
             >
+            <div v-else class="flex items-center">
+              <NuxtLink
+                to="/user"
+                class="text-primary-200 dark:text-white mr-4"
+              >
+                <div class="flex items-center">
+                  <img
+                    :src="user.user_metadata.picture"
+                    alt="user.user_metadata.name"
+                    class="w-8 h-8 rounded-full"
+                  />
+                  <span class="ml-2">{{ user.user_metadata.name }}</span>
+                </div>
+              </NuxtLink>
+              <button
+                @click.prevent="logout"
+                class="text-white bg-[#423ed8] hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                :class="defaultTransition"
+              >
+                Sign Out
+              </button>
+            </div>
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -96,6 +119,14 @@
 <script setup lang="ts">
 const { defaultTransition } = useTailwindConfig()
 const menuexpanded = ref(false)
+
+const client = useSupabaseClient()
+const user = useSupabaseUser()
+
+const logout = async () => {
+  const { error } = await client.auth.signOut()
+  navigateTo("/login")
+}
 </script>
 
 <style scoped></style>

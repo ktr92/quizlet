@@ -22,7 +22,7 @@
             <h1
               class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
             >
-              Sign in to your account {{ user }}
+              Sign in to your account 
             </h1>
 
             <button
@@ -102,12 +102,12 @@ definePageMeta({
 
 const client = useSupabaseClient()
 const user = useSupabaseUser()
-/* 
+
 watchEffect(() => {
   if (user.value) {
     return navigateTo("/")
   }
-}) */
+}) 
 
 const auth = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({

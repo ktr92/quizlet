@@ -29,4 +29,6 @@ svg.icon path {
 .dark svg.icon path {
   fill: #5f99f7;
 }
+
+
 </style>

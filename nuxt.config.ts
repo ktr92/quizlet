@@ -17,4 +17,7 @@ export default defineNuxtConfig({
       ["defineStore", "definePiniaStore"], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
+  supabase: {
+    redirect: false
+  }
 })
