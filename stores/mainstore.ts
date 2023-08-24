@@ -3,7 +3,7 @@ import { defineStore } from "pinia"
 export const useMainStore = defineStore("mainstore", {
   state: () => ({
     loading: false,
-    dark: true,
+    dark: false,
     user: false,
   }),
   getters: {

@@ -1,6 +1,6 @@
 <template>
   <div :class="{ dark: darkMode }">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
       <Loading v-if="mainStore.loading" />
 
       <Header />
@@ -29,6 +29,4 @@ svg.icon path {
 .dark svg.icon path {
   fill: #5f99f7;
 }
-
-
 </style>
