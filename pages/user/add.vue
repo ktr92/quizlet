@@ -5,12 +5,16 @@
         class="md:text-5xl text-primary-800 dark:text-white font-bold mb-8 flex justify-between items-center"
       >
         <span>Adding new course</span>
-        <UIButton size="md" :rounded="true">Save</UIButton>
+        <UIButton size="md" :rounded="true" @click="onSubmit">Save</UIButton>
       </div>
     </div>
 
     <form action="#" @submit.prevent="onSubmit">
       <UIInput v-model="ctitle" placeholder="Course title"></UIInput>
+      <UIInput
+        v-model="cdescription"
+        placeholder="Course description"
+      ></UIInput>
       <div class="my-4" v-for="(item, index) in newitems" :key="item.count">
         <div class="bg-white dark:bg-gray-700 rounded-lg">
           <div class="flex justify-between px-4 py-2">
@@ -50,12 +54,15 @@
 </template>
 
 <script setup lang="ts">
+const user = useSupabaseUser()
+
 const ctitle = ref("")
+const cdescription = ref("")
 const idx = ref(0)
 const dt = ref("")
 const dd = ref("")
 const newitems = ref([{ dt: "", dd: "", count: 0 }])
-const onSubmit = () => {}
+
 const addnew = () => {
   idx.value++
   newitems.value.push({ dt: "", dd: "", count: idx.value })
@@ -68,6 +75,27 @@ const remove = (index: number) => {
 const count = computed(() => {
   return newitems.value.length
 })
+
+const onSubmit = async () => {
+  let valid = false
+  if (ctitle.value.length > 0) {
+    valid = true
+  } else {
+  }
+  if (valid) {
+    await useFetch("/api/prisma/create-item", {
+      method: "POST",
+      body: {
+        user: user.value.id,
+        title: ctitle.value,
+        description: cdescription.value,
+        words: [...newitems.value],
+      },
+    })
+
+    navigateTo("/user/courses/")
+  }
+}
 </script>
 
 <style scoped></style>
