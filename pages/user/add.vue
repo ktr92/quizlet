@@ -10,7 +10,12 @@
     </div>
 
     <form action="#" @submit.prevent="onSubmit">
-      <UIInput v-model="ctitle" placeholder="Course title"></UIInput>
+      <UIInput
+        v-model="ctitle"
+        placeholder="Course title"
+        :errors="errors.ctitle"
+      ></UIInput>
+
       <UIInput
         v-model="cdescription"
         placeholder="Course description"
@@ -54,8 +59,10 @@
 </template>
 
 <script setup lang="ts">
-const user = useSupabaseUser()
+import { useForm } from "vee-validate"
+import * as yup from "yup"
 
+const user = useSupabaseUser()
 const ctitle = ref("")
 const cdescription = ref("")
 const idx = ref(0)
@@ -74,6 +81,20 @@ const remove = (index: number) => {
 }
 const count = computed(() => {
   return newitems.value.length
+})
+
+const schema = yup.object().shape({
+  newitems: yup.array().of(
+    yup.object().shape({
+      dt: yup.string().required("Enter a value").max(200),
+    })
+  ),
+  ctitle: yup.string().required("Enter the title").min(1).max(100),
+  cdescription: yup.string().max(300),
+})
+
+const { handleSubmit, errors } = useForm({
+  validationSchema: schema,
 })
 
 const onSubmit = async () => {
