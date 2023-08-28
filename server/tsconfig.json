@@ -1,3 +1,5 @@
 {
-  "extends": "../.nuxt/tsconfig.server.json"
+  "extends": "../.nuxt/tsconfig.server.json",
+  "lib": ["es6", "dom", "es2017"],
+  "target": "es5"
 }

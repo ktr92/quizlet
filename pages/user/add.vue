@@ -18,11 +18,13 @@
         name="ctitle"
       ></UIInput>
 
-      <UIInput
+      <UITagsInput
+        @update="updateTags"
         v-model="cdescription"
-        placeholder="Course description"
-        name="cdescription"
-      ></UIInput>
+        :options="['Hello', 'World']"
+        :showCount="true"
+      ></UITagsInput>
+
       <div class="my-4" v-for="(field, index) in newitems" :key="field.count">
         <div class="bg-white dark:bg-gray-700 rounded-lg">
           <div class="flex justify-between px-4 py-2">
@@ -48,7 +50,7 @@
             </div>
             <div class="px-2 w-full md:w-[50%] md:ml-2">
               <UIInput
-                v-model="newitems[index].dt"
+                v-model="newitems[index].dd"
                 placeholder="Value"
                 :name="`newitems[${index}].dd`"
               ></UIInput>
@@ -69,7 +71,7 @@ import * as yup from "yup"
 
 const user = useSupabaseUser()
 const ctitle = ref("")
-const cdescription = ref("")
+const cdescription = ref<string[]>([])
 const idx = ref(0)
 const newitems = ref([{ dt: "", dd: "", count: 0 }])
 
@@ -85,6 +87,10 @@ const remove = (index: number) => {
 const count = computed(() => {
   return newitems.value.length
 })
+
+const updateTags = (payload: string[]) => {
+  cdescription.value = [...payload]
+}
 
 const schema = yup.object().shape({
   newitems: yup.array().of(

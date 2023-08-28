@@ -1,12 +1,12 @@
 <template>
-  <button
+  <span
     @click.prevent="onClick"
     :disabled="props.disabled"
     :class="classes"
     class="text-white focus:ring-4 focus:outline-none font-medium px-5 py-4 text-md text-center cursor-pointer whitespace-nowrap min-w-[115px] md:min-w-[150px]"
   >
     <slot></slot>
-  </button>
+  </span>
 </template>
 
 <script setup lang="ts">
