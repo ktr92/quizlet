@@ -2,30 +2,22 @@
   <div class="w-full">
     <input
       type="text"
-      :model-value="props.modelValue"
+      :name="props.name"
+      :value="inputValue"
       :placeholder="props.placeholder"
       @input="(event) => onChange(event)"
       @keyup.enter="$emit('onEnter')"
       @blur="handleBlur"
       class="w-full px-4 border-0 border-b-4 border-slate-400 hover:border-slate-500 focus:border-b-primary-500 outline-none transition-all h-10 dark:bg-gray-700 dark:text-white"
     />
-    <span v-if="errors">{{ errors }}</span>
+    <span v-if="errorMessage && meta.touched" class="text-red-700 text-sm">{{
+      errorMessage
+    }}</span>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useField } from "vee-validate"
-
-const {
-  value: inputValue,
-  errorMessage,
-  handleBlur,
-  handleChange,
-  meta,
-} = useField(name, undefined, {
-  initialValue: props.value,
-})
-
 const emits = defineEmits(["update:modelValue"])
 const props = defineProps({
   modelValue: {
@@ -36,12 +28,30 @@ const props = defineProps({
     type: String,
     required: false,
   },
+
+  name: {
+    type: String,
+    default: "",
+  },
   errors: {
     type: String,
     required: false,
   },
 })
+
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(props.name, undefined, {
+  initialValue: props.modelValue,
+  valueProp: props.modelValue,
+})
+
 const onChange = (event: Event) => {
+  handleChange(event, true)
   emits("update:modelValue", (<HTMLTextAreaElement>event.target).value)
 }
 </script>
