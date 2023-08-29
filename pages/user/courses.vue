@@ -1,8 +1,13 @@
 <template>
   <div class="">
     <div>
+      <UIItemLink
+        title="Add new course"
+        url="/user/add"
+        type="button"
+      ></UIItemLink>
       <div v-for="card in courses" class="w-full">
-        <NuxtLink :to="'/user/course/' + card.url" class="cursor-pointer">
+        <NuxtLink :to="'/user/course/' + card.course_id" class="cursor-pointer">
           <div
             class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
           >
@@ -13,21 +18,21 @@
                 <h3
                   class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mr-4 w-full md:w-fit"
                 >
-                  {{ card.title }}
+                  {{ card.course_title }}
                 </h3>
                 <div
                   class="font-normal text-gray-700 dark:text-gray-400 w-fit md:w-fullw-full md:w-fit"
                 >
-                  Items: {{ card.count }}
+                  Items: {{ card.course_count }}
                 </div>
               </div>
               <div
-                class="font-normal text-gray-700 dark:text-gray-400 w-full md:w-fit"
+                class="font-normal text-gray-700 dark:text-gray-400 md:w-fit flex"
               >
-                <div v-for="tag in card.tags">
+                <div v-for="tag in card.course_tags" :key="tag.tag_id">
                   <span
                     class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400"
-                    >{{ tag }}</span
+                    >{{ tag.tags.tag_title }}</span
                   >
                 </div>
               </div>
@@ -43,7 +48,20 @@
 definePageMeta({
   middleware: ["auth"],
 })
-const courses = [
+
+const user = useSupabaseUser()
+
+/* onBeforeMount(async () => {
+  courses.value = await useFetch(`/api/prisma/get-course/${user.value.id}`)
+}) */
+
+const {
+  data: courses,
+  pending: pendingCategory,
+  error: errorCategory,
+} = await useFetch<ICourse>(() => `/api/courses/${user.value.id}`)
+
+/* const courses = [
   {
     title: "GET pharasal verb",
     description: "",
@@ -65,7 +83,7 @@ const courses = [
     tags: ["phrasal"],
     url: "3",
   },
-]
+] */
 </script>
 
 <style scoped></style>

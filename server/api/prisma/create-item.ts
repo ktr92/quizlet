@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client"
+import { string } from "yup"
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
@@ -8,7 +9,21 @@ export default defineEventHandler(async (event) => {
     data: {
       course_user: body.user,
       course_title: body.title,
-      course_description: body.description,
+      course_count: body.words.length,
+      course_tags: {
+        create: body.description.map((item: string) => ({
+          tags: {
+            connectOrCreate: {
+              where: {
+                tag_title: item,
+              },
+              create: {
+                tag_title: item,
+              },
+            },
+          },
+        })),
+      },
     },
   })
 

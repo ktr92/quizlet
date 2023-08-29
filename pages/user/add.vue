@@ -19,7 +19,6 @@
       ></UIInput>
 
       <UITagsInput
-        @update="updateTags"
         v-model="cdescription"
         :options="['Hello', 'World']"
         :showCount="true"
@@ -88,10 +87,6 @@ const count = computed(() => {
   return newitems.value.length
 })
 
-const updateTags = (payload: string[]) => {
-  cdescription.value = [...payload]
-}
-
 const schema = yup.object().shape({
   newitems: yup.array().of(
     yup.object().shape({
@@ -116,7 +111,7 @@ const onSubmit = handleSubmit(async () => {
     body: {
       user: user.value.id,
       title: ctitle.value,
-      description: cdescription.value,
+      description: [...cdescription.value],
       words: [...newitems.value],
     },
   })
