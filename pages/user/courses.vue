@@ -10,12 +10,8 @@
         <UILoading />
       </template>
       <template v-else>
-        <template v-if="someError || error">
-          <div
-            class="p-4 fixed top-2 text-center left-0 right-0 border-2 border-red-300 w-full shadow-xl rounded max-w-[600px] mx-auto bg-white text-gray-800 text-xl"
-          >
-            Что-то пошло не так!
-          </div>
+        <template v-if="someError.length || error">
+          <Errors :errors="someError + error" />
         </template>
         <template v-else>
           <div v-for="card in courses" class="w-full">
@@ -66,7 +62,7 @@ definePageMeta({
 const user = useSupabaseUser()
 
 const isLoading = ref(false)
-const someError = ref(false)
+const someError = ref("")
 
 const {
   data: courses,
@@ -78,14 +74,14 @@ const {
     isLoading.value = true
   },
   onRequestError({ request, options, error }) {
-    someError.value = true
+    someError.value = error.message
   },
   onResponse({ request, response, options }) {
     isLoading.value = false
   },
   onResponseError({ request, response, options }) {
     isLoading.value = false
-    someError.value = true
+    someError.value = response.statusText
   },
 })
 </script>
