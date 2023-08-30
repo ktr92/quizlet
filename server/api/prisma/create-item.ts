@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client"
-import { string } from "yup"
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {

@@ -1,15 +1,16 @@
-export { ICard }
+export {}
 
-const productDescription =
-  Prisma.validator<Prisma.oc_product_descriptionArgs>()({
-    include: {
-      product_description: true,
+const courseWithTags = Prisma.validator<Prisma.CoursesArgs>()({
+  include: {
+    course_tags: {
+      include: {
+        tags: true,
+      },
     },
-  })
-
-const categoryWithRelations = Prisma.validator<Prisma.oc_categoryArgs>()({
-  include: { oc_category_description: true },
+  },
 })
+
+type courseWithTags = Prisma.CoursesGetPayload<typeof courseWithTags>
 
 declare global {
   interface ICard {
@@ -27,5 +28,15 @@ declare global {
     title: string
     tags: Array
     count: number
+  }
+  interface ICourseIndexed extends ICourse {
+    [property: string]: any
+  }
+  interface ICourseTags extends courseWithTags {
+    id: number
+    title: string
+    tags: Array
+    count: number
+    tags: Array
   }
 }
