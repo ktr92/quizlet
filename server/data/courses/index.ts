@@ -16,17 +16,12 @@ export async function getCoursesByUser(userId: string) {
 
   return courses
 }
-export async function getCoursesByTag(userId: string, tagname: number) {
+export async function getCoursesByTag(userId: string, tagname: string) {
   const courses = await prisma.courses.findMany({
     include: {
       course_tags: {
         select: {
           tags: true,
-        },
-        where: {
-          tags: {
-            tag_id: tagname,
-          },
         },
       },
     },
@@ -35,7 +30,7 @@ export async function getCoursesByTag(userId: string, tagname: number) {
       course_tags: {
         some: {
           tags: {
-            tag_id: tagname,
+            tag_title: tagname,
           },
         },
       },

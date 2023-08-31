@@ -74,7 +74,7 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<ICourseTags>(`/api/tags/${user.value.id}`, {
+} = await useFetch<ICourseTags>(`/api/tagitem/${user.value.id}`, {
   query: {
     tag: tagname,
   },

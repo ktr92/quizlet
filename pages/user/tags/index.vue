@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="tag in tags" class="w-full">
-      <NuxtLink :to="'/user/tag/' + tag.id" class="cursor-pointer">
+      <NuxtLink :to="'/user/tag/' + tag.title" class="cursor-pointer">
         <div
           class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
         >

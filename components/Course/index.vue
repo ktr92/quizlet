@@ -28,7 +28,7 @@
       <div>
         <component
           :is="courseComponent"
-          :items="course"
+          :items="course.couesritem_words"
           :key="count"
         ></component>
       </div>
@@ -42,6 +42,10 @@ import { CourseCards, CourseLearn, CourseTests } from "#components"
 const props = defineProps({
   courseid: {
     type: String,
+    required: true,
+  },
+  course: {
+    type: Object as PropType<ICourseWords>,
     required: true,
   },
 })
@@ -62,7 +66,7 @@ const courseComponent = computed(() => {
   }
   return CourseCards
 })
-
+/* 
 const course = [
   {
     dt: "tighten",
@@ -88,7 +92,7 @@ const course = [
     dt: "come with",
     dd: "ладить",
   },
-]
+] */
 
 const showCards = () => {
   iscomponent.value = "cards"

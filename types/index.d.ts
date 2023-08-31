@@ -9,8 +9,15 @@ const courseWithTags = Prisma.validator<Prisma.CoursesArgs>()({
     },
   },
 })
+const courseWithWords = Prisma.validator<Prisma.CoursesArgs>()({
+  include: {
+    couesritem_words: true,
+  },
+})
 
 type courseWithTags = Prisma.CoursesGetPayload<typeof courseWithTags>
+
+type courseWithWords = Prisma.CoursesGetPayload<typeof courseWithWords>
 
 declare global {
   interface ICard {
@@ -44,5 +51,13 @@ declare global {
   interface ITags {
     id: number
     title: string
+  }
+
+  interface ICourseWords extends courseWithWords {
+    id: number
+    title: string
+    tags: Array
+    count: number
+    couesritem_words: Array
   }
 }
