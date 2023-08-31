@@ -38,5 +38,11 @@ declare global {
     tags: Array
     count: number
     tags: Array
+    course_tags: Array
+  }
+
+  interface ITags {
+    id: number
+    title: string
   }
 }
