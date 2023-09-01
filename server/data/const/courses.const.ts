@@ -5,4 +5,5 @@ export enum CourseProperties {
   couesritem_words = "words",
   course_tags = "tags",
   course_count = "count",
+  course_archived = "status",
 }

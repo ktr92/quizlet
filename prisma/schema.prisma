@@ -15,6 +15,7 @@ model Courses {
   course_user      String          @db.Uuid
   course_title     String
   course_count     Int             @default(1)
+  course_archived  Boolean         @default(false)
   couesritem_words Words[]
   course_tags      TagsOnCourses[]
 }

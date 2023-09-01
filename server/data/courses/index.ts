@@ -11,6 +11,7 @@ export async function getCoursesByUser(userId: string) {
     },
     where: {
       course_user: userId,
+      course_archived: false,
     },
   })
 
@@ -27,6 +28,7 @@ export async function getCoursesByTag(userId: string, tagname: string) {
     },
     where: {
       course_user: userId,
+      course_archived: false,
       course_tags: {
         some: {
           tags: {

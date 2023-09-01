@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <div v-if="course">
-          <Course :courseid="routeid" :course="course" />
+          <Course :courseid="routeid" :course="course" @remove="removeCard" />
         </div>
       </template>
     </template>
@@ -53,6 +53,35 @@ const {
     someError.value = response.statusText
   },
 })
+
+const removeCard = async () => {
+  const {
+    data: courseRemoved,
+    pending,
+    error,
+    refresh,
+  } = await useFetch(`/api/course/${user.value.id}`, {
+    method: "PATCH",
+    body: {
+      courseId: routeid,
+    },
+    onRequest({ request, options }) {
+      isLoading.value = true
+      course.value = null
+    },
+    onRequestError({ request, options, error }) {
+      someError.value = "Request error! " + error.message
+    },
+    onResponse({ request, response, options }) {
+      isLoading.value = false
+    },
+    onResponseError({ request, response, options }) {
+      isLoading.value = false
+      someError.value = "Response error! " + response.statusText
+    },
+  })
+  navigateTo("/user/courses")
+}
 </script>
 
 <style scoped></style>

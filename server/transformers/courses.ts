@@ -43,3 +43,30 @@ export const courseItemTransformer = <T extends { words: IWord[] }>(
 
   return resCourse
 }
+export const courseItemRemove = <T extends { words: IWord[] }>(
+  course: ICourseWords
+): T => {
+  let resCourse = {
+    ...Object.fromEntries(
+      Object.values(CourseProperties).map((val) => [
+        val,
+        getValues(CourseProperties, course, val as string),
+      ])
+    ),
+  } as T
+
+  const resWords: IWord[] = resCourse.words.map((item: any) => {
+    return {
+      ...Object.fromEntries(
+        Object.values(WordsProperties).map((val) => [
+          val,
+          getValues(WordsProperties, item, val as string),
+        ])
+      ),
+    } as IWord
+  })
+
+  resCourse.words = [...resWords]
+
+  return resCourse
+}

@@ -115,6 +115,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(["remove", "update", "import", "export"])
+
 let cardmenu = ref(false)
 
 let count = ref(0)
@@ -153,7 +155,9 @@ const exportItem = () => {}
 const importItem = () => {}
 const editItem = () => {}
 
-const removeItem = () => {}
+const removeItem = () => {
+  emit("remove", props.course.id)
+}
 const editMenu = () => {
   cardmenu.value = !cardmenu.value
 }
