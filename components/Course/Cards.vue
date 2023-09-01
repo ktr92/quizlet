@@ -38,12 +38,17 @@
             class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
           >
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
-              <UIIconbutton @some-event="randomize">
+              <UIIconbutton
+                @some-event="randomize"
+                bg="#efadad"
+                bghover=""
+                tooltip="Randomize"
+              >
                 <Icon name="uil:arrow-random" size="30" />
               </UIIconbutton>
             </div>
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-              <UIIconbutton @some-event="changeSide">
+              <UIIconbutton @some-event="changeSide" tooltip="Change side">
                 <Icon name="eva:flip-2-fill" size="30" />
               </UIIconbutton>
             </div>
@@ -61,12 +66,22 @@
             class="flex py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-center"
           >
             <div class="ml-1 md:ml-4 w-[50%]">
-              <UIIconbutton @some-event="nextcard" bg="#efadad" bghover="">
+              <UIIconbutton
+                @some-event="nextcard"
+                bg="#efadad"
+                bghover=""
+                tooltip="Don't know"
+              >
                 <Icon name="gg:close" size="30" />
               </UIIconbutton>
             </div>
             <div class="ml-1 md:ml-4 w-[50%]">
-              <UIIconbutton @some-event="makeknown" bg="#c4eac4" bghover="">
+              <UIIconbutton
+                @some-event="makeknown"
+                bg="#c4eac4"
+                bghover=""
+                tooltip="Know"
+              >
                 <Icon name="heroicons-solid:check" size="30" />
               </UIIconbutton>
             </div>

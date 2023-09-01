@@ -3,7 +3,7 @@
     <input
       type="text"
       :name="props.name"
-      :value="inputValue"
+      :value="modelValue"
       :placeholder="props.placeholder"
       @input="(event) => onChange(event)"
       @keyup.enter="$emit('onEnter')"
