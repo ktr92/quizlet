@@ -31,6 +31,7 @@ export default defineEventHandler(async (event) => {
       data: {
         word_dt: item.dt,
         word_dd: item.dd,
+        word_count: item.count,
         courseitem_id: course.course_id,
       },
     })

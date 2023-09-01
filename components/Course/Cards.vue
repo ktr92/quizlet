@@ -81,7 +81,7 @@
 <script setup lang="ts">
 const props = defineProps({
   items: {
-    type: Array<ICard>,
+    type: Array<IWord>,
     required: true,
   },
 })
@@ -159,6 +159,7 @@ const makeknown = () => {
   restItems.value.splice(current.value, 1)
   /*  changeCurrent() */
   count.value += 1
+  flipped.value = false
 }
 
 const randomize = () => {

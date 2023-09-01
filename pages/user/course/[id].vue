@@ -37,7 +37,7 @@ const {
   refresh,
 } = await useFetch<ICourseWords>(`/api/course/${user.value.id}`, {
   query: {
-    courseid: routeid,
+    courseId: routeid,
   },
   onRequest({ request, options }) {
     isLoading.value = true

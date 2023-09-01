@@ -1,8 +1,4 @@
-export const getValues = (
-  properties: any,
-  item: ICourseIndexed,
-  val: string
-) => {
+export const getValues = (properties: any, item: any, val: string) => {
   const indexOfVal = Object.values(properties).indexOf(
     val as unknown as typeof properties
   )

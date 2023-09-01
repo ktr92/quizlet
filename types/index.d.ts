@@ -53,11 +53,11 @@ declare global {
     title: string
   }
 
-  interface ICourseWords extends courseWithWords {
+  interface ICourseWords extends courseWithWords, ICourseIndexed {
     id: number
     title: string
     tags: Array
     count: number
-    couesritem_words: Array
+    words: Array<IWord>
   }
 }

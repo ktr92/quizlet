@@ -23,6 +23,7 @@ model Words {
   word_id       Int    @id @default(autoincrement())
   word_dt       String
   word_dd       String
+  word_count    Int    @default(autoincrement())
   courseitem_id Int
 
   Courses Courses? @relation(fields: [courseitem_id], references: [course_id])

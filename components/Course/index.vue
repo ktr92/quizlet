@@ -28,7 +28,7 @@
       <div>
         <component
           :is="courseComponent"
-          :items="course.couesritem_words"
+          :items="course.words"
           :key="count"
         ></component>
       </div>

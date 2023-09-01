@@ -5,5 +5,5 @@ export default defineEventHandler(async (event) => {
   const { courseId } = getQuery(event)
   const userId = event.context.params?.id as string
   const course = await getCourseById(userId, Number(courseId))
-  return [...courseItemTransformer(course as unknown as ICourseWords[])]
+  return courseItemTransformer(course as unknown as ICourseWords)
 })
