@@ -153,7 +153,9 @@ const showTests = () => {
 }
 const exportItem = () => {}
 const importItem = () => {}
-const editItem = () => {}
+const editItem = () => {
+  emit("update", props.course.id)
+}
 
 const removeItem = () => {
   emit("remove", props.course.id)

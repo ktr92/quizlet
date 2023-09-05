@@ -4,7 +4,13 @@ export async function getCourseById(userId: string, courseId: number) {
   const courses = await prisma.courses.findFirst({
     include: {
       couesritem_words: true,
+      course_tags: {
+        include: {
+          tags: true,
+        },
+      },
     },
+    
     where: {
       course_user: userId,
       course_id: courseId,

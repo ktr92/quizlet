@@ -59,5 +59,7 @@ declare global {
     tags: Array
     count: number
     words: Array<IWord>
+    course_tags: Array<ITags>
+
   }
 }

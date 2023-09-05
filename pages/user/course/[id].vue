@@ -9,7 +9,7 @@
       </template>
       <template v-else>
         <div v-if="course">
-          <Course :courseid="routeid" :course="course" @remove="removeCard" />
+          <Course :courseid="routeid" :course="course" @remove="removeCard" @update='editItem' />
         </div>
       </template>
     </template>
@@ -82,6 +82,12 @@ const removeCard = async () => {
   })
   navigateTo("/user/courses")
 }
+
+const editItem = () => {
+  navigateTo(`/user/course/edit/${routeid}`)
+
+}
+
 </script>
 
 <style scoped></style>

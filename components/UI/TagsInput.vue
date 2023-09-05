@@ -33,11 +33,21 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  initialTags: {
+    type: Array<string>,
+    required: false
+  }
 })
 
 const currentTag = ref("")
 
 const tags = ref<string[]>([])
+
+onMounted(() => {
+  if (props.initialTags) {
+    tags.value = [...props.initialTags]
+  }
+})
 
 const addTag = (event: Event) => {
   event.preventDefault()
