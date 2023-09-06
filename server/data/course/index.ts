@@ -45,9 +45,6 @@ export async function updateCourseById(userId: string, body: any) {
       course_tags: {
         deleteMany: {
           course_id: Number(body.course_id),
-          NOT: {
-            // удаляет все сейчас
-          },
         },
         create: body.course_tags.map((item: string) => ({
           tags: {

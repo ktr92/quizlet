@@ -35,8 +35,8 @@ const props = defineProps({
   },
   initialTags: {
     type: Array<string>,
-    required: false
-  }
+    required: false,
+  },
 })
 
 const currentTag = ref("")
@@ -47,6 +47,7 @@ onMounted(() => {
   if (props.initialTags) {
     tags.value = [...props.initialTags]
   }
+  emits("update:modelValue", tags.value)
 })
 
 const addTag = (event: Event) => {
