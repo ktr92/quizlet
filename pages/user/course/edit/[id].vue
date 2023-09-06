@@ -23,13 +23,13 @@
 
             <form @submit="onSubmit">
               <UIInput
-                v-model="resTitle"
+                v-model="ctitle"
                 placeholder="Course title"
                 name="ctitle"
               ></UIInput>
 
               <UITagsInput
-                v-model="resDescription"
+                v-model="cdescription"
                 :initialTags="resDescription"
                 :options="['Hello', 'World']"
                 :showCount="true"
@@ -94,7 +94,7 @@ const user = useSupabaseUser()
 const ctitle = ref("")
 const cdescription = ref<string[]>([])
 const idx = ref(0)
-const newitems = ref([{ dt: "", dd: "", count: 0 }])
+/* const newitems = ref([{ dt: "", dd: "", count: 0 }]) */
 
 const addnew = () => {
   idx.value++
@@ -114,6 +114,12 @@ const resTitle = computed(() => {
 })
 const resDescription = computed(() => {
   return course.value ? course.value.tags.map((item: ITags) => item.title) : []
+})
+const newitems = computed(() => {
+  return course.value ? course.value.words : []
+})
+const courseId = computed(() => {
+  return course.value ? course.value.id : null
 })
 
 const schema = yup.object().shape({
@@ -135,13 +141,33 @@ const failValidation = () => {
   console.log("fail")
 }
 const onSubmit = handleSubmit(async () => {
-  await useFetch("/api/prisma/create-item", {
-    method: "POST",
+  const {
+    data: courseUpdated,
+    pending,
+    error,
+    refresh,
+  } = await useFetch(`/api/course/${user.value.id}`, {
+    method: "PATCH",
     body: {
-      user: user.value.id,
-      title: ctitle.value,
-      description: cdescription.value,
-      words: newitems.value,
+      course_title: ctitle.value,
+      course_tags: cdescription.value,
+      couesritem_words: newitems.value,
+      course_count: count.value,
+      course_id: courseId.value,
+    },
+    onRequest({ request, options }) {
+      isLoading.value = true
+      course.value = null
+    },
+    onRequestError({ request, options, error }) {
+      someError.value = "Request error! " + error.message
+    },
+    onResponse({ request, response, options }) {
+      isLoading.value = false
+    },
+    onResponseError({ request, response, options }) {
+      isLoading.value = false
+      someError.value = "Response error! " + response.statusText
     },
   })
 
