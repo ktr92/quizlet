@@ -164,6 +164,7 @@ const onSubmit = handleSubmit(async () => {
     },
     onResponse({ request, response, options }) {
       isLoading.value = false
+      console.log(response._data.title)
     },
     onResponseError({ request, response, options }) {
       isLoading.value = false
@@ -195,6 +196,7 @@ const {
   onResponse({ request, response, options }) {
     isLoading.value = false
     someError.value = ""
+    ctitle.value = response._data.title
   },
   onResponseError({ request, response, options }) {
     isLoading.value = false

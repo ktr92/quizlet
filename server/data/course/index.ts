@@ -38,6 +38,7 @@ export async function updateCourseById(userId: string, body: any) {
   const courses = await prisma.courses.update({
     where: {
       course_id: Number(body.course_id),
+      course_user: userId,
     },
     data: {
       course_count: body.course_count,
@@ -59,8 +60,48 @@ export async function updateCourseById(userId: string, body: any) {
           },
         })),
       },
+      couesritem_words: {
+        upsert: body.couesritem_words.map((item: IWord) => ({
+          words: {
+            create: {
+              word_dt: item.dt,
+              word_dd: item.dd,
+              word_count: item.count,
+              courseitem_id: body.course_id,
+            },
+            update: {
+              word_dt: item.dt,
+              word_dd: item.dd,
+              word_count: item.count,
+              courseitem_id: body.course_id,
+            },
+          },
+        })),
+      },
     },
   })
+
+  body.couesritem_words.forEach(async (item: IWord) => {
+    await prisma.words.upsert({
+      where: {
+        word_id: body.course_id,
+        courseitem_id: body.course_id,
+      },
+      update: {
+        word_dt: item.dt,
+        word_dd: item.dd,
+        word_count: item.count,
+        courseitem_id: body.course_id,
+      },
+      create: {
+        word_dt: item.dt,
+        word_dd: item.dd,
+        word_count: item.count,
+        courseitem_id: body.course_id,
+      },
+    })
+  })
+
   /* const courses = await prisma.courses.update({
     data: {
       course_archived: body.course_archived,
