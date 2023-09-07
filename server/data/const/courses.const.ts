@@ -6,4 +6,5 @@ export enum CourseProperties {
   course_tags = "tags",
   course_count = "count",
   course_archived = "status",
+  course_words = "words",
 }

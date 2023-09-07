@@ -23,10 +23,27 @@ export default defineEventHandler(async (event) => {
           },
         })),
       },
+      course_words: {
+        create: body.words.map((item: IWord) => ({
+          words: {
+            connectOrCreate: {
+              where: {
+                word_idcourse: item.id,
+              },
+              create: {
+                word_idcourse: item.id,
+                word_dt: item.dt,
+                word_dd: item.dd,
+                word_count: item.count,
+              },
+            },
+          },
+        })),
+      },
     },
   })
 
-  body.words.forEach(async (item: IWord) => {
+  /*   body.words.forEach(async (item: IWord) => {
     await prisma.words.create({
       data: {
         word_dt: item.dt,
@@ -35,7 +52,7 @@ export default defineEventHandler(async (event) => {
         courseitem_id: course.course_id,
       },
     })
-  })
+  }) */
 
   return course
 })

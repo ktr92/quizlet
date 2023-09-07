@@ -9,7 +9,12 @@
       </template>
       <template v-else>
         <div v-if="course">
-          <Course :courseid="routeid" :course="course" @remove="removeCard" @update='editItem' />
+          <Course
+            :courseid="routeid"
+            :course="course"
+            @remove="removeCard"
+            @update="editItem"
+          />
         </div>
       </template>
     </template>
@@ -61,7 +66,7 @@ const removeCard = async () => {
     error,
     refresh,
   } = await useFetch(`/api/course/${user.value.id}`, {
-    method: "PATCH",
+    method: "DELETE",
     body: {
       courseId: routeid,
     },
@@ -85,9 +90,7 @@ const removeCard = async () => {
 
 const editItem = () => {
   navigateTo(`/user/course/edit/${routeid}`)
-
 }
-
 </script>
 
 <style scoped></style>

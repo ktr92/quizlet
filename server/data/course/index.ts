@@ -3,10 +3,14 @@ import prisma from "../prisma"
 export async function getCourseById(userId: string, courseId: number) {
   const courses = await prisma.courses.findFirst({
     include: {
-      couesritem_words: true,
       course_tags: {
         include: {
           tags: true,
+        },
+      },
+      course_words: {
+        include: {
+          words: true,
         },
       },
     },
@@ -34,7 +38,6 @@ export async function removeCourseById(userId: string, courseId: number) {
 }
 
 export async function updateCourseById(userId: string, body: any) {
-  console.log([...body.course_tags])
   const courses = await prisma.courses.update({
     where: {
       course_id: Number(body.course_id),
@@ -60,46 +63,27 @@ export async function updateCourseById(userId: string, body: any) {
           },
         })),
       },
-      couesritem_words: {
-        upsert: body.couesritem_words.map((item: IWord) => ({
+      course_words: {
+        deleteMany: {
+          course_id: Number(body.course_id),
+        },
+        create: body.course_words.map((item: IWord) => ({
           words: {
-            create: {
-              word_dt: item.dt,
-              word_dd: item.dd,
-              word_count: item.count,
-              courseitem_id: body.course_id,
-            },
-            update: {
-              word_dt: item.dt,
-              word_dd: item.dd,
-              word_count: item.count,
-              courseitem_id: body.course_id,
+            connectOrCreate: {
+              where: {
+                word_idcourse: item.id,
+              },
+              create: {
+                word_dt: item.dt,
+                word_dd: item.dd,
+                word_count: item.count,
+                word_idcourse: item.id,
+              },
             },
           },
         })),
       },
     },
-  })
-
-  body.couesritem_words.forEach(async (item: IWord) => {
-    await prisma.words.upsert({
-      where: {
-        word_id: body.course_id,
-        courseitem_id: body.course_id,
-      },
-      update: {
-        word_dt: item.dt,
-        word_dd: item.dd,
-        word_count: item.count,
-        courseitem_id: body.course_id,
-      },
-      create: {
-        word_dt: item.dt,
-        word_dd: item.dd,
-        word_count: item.count,
-        courseitem_id: body.course_id,
-      },
-    })
   })
 
   /* const courses = await prisma.courses.update({

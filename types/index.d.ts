@@ -28,6 +28,7 @@ declare global {
     dt: string
     dd: string
     count: number
+    id: string
   }
 
   interface ICourse {
@@ -60,6 +61,9 @@ declare global {
     count: number
     words: Array<IWord>
     course_tags: Array<ITags>
-
+  }
+  interface ICourseTW extends ICourseIndexed {
+    words: Array<IWord>
+    tags: Array<ITags>
   }
 }

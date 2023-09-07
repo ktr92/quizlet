@@ -11,23 +11,25 @@ datasource db {
 }
 
 model Courses {
-  course_id        Int             @id @default(autoincrement())
-  course_user      String          @db.Uuid
-  course_title     String
-  course_count     Int             @default(1)
-  course_archived  Boolean         @default(false)
-  couesritem_words Words[]
-  course_tags      TagsOnCourses[]
+  course_id       Int              @id @default(autoincrement())
+  course_user     String           @db.Uuid
+  course_title    String
+  course_count    Int              @default(1)
+  course_archived Boolean          @default(false)
+  course_words    WordsOnCourses[]
+  course_tags     TagsOnCourses[]
 }
 
 model Words {
-  word_id       Int    @id @default(autoincrement())
+  word_id       Int              @id @default(autoincrement())
   word_dt       String
   word_dd       String
-  word_count    Int    @default(autoincrement())
-  courseitem_id Int
+  word_count    Int              @default(autoincrement())
+  word_idcourse String           @unique
+  word_courses  WordsOnCourses[]
+  // courseitem_id Int
 
-  Courses Courses? @relation(fields: [courseitem_id], references: [course_id])
+  //Courses Courses? @relation(fields: [courseitem_id], references: [course_id])
 }
 
 model Tags {
@@ -43,4 +45,13 @@ model TagsOnCourses {
   tag_id    Int
 
   @@id([course_id, tag_id])
+}
+
+model WordsOnCourses {
+  courses   Courses @relation(fields: [course_id], references: [course_id])
+  course_id Int
+  words     Words   @relation(fields: [word_id], references: [word_id])
+  word_id   Int
+
+  @@id([course_id, word_id])
 }

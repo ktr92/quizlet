@@ -2,7 +2,9 @@ import { CourseProperties } from "../data/const/courses.const"
 import { WordsProperties } from "../data/const/words.const"
 import { getValues } from "../utils/getValues"
 import { tagsTransformer } from "../transformers/tags"
-import { TagsProperties } from "../data/const/tags.const"
+import { wordsTransformer } from "../transformers/words"
+
+import lodash from "lodash"
 
 export const coursesTransformer = <T>(courses: ICourseTags[]): Array<T> => {
   const result = courses.map((item): T => {
@@ -18,10 +20,11 @@ export const coursesTransformer = <T>(courses: ICourseTags[]): Array<T> => {
   return result
 }
 
-export const courseItemTransformer = <T extends { words: IWord[], tags: ITags[] }>(
+export const courseItemTransformer = <
+  T extends { words: IWord[]; tags: ITags[] }
+>(
   course: ICourseWords
 ): T => {
-  
   let resCourse = {
     ...Object.fromEntries(
       Object.values(CourseProperties).map((val) => [
@@ -30,7 +33,7 @@ export const courseItemTransformer = <T extends { words: IWord[], tags: ITags[] 
       ])
     ),
   } as T
-  const resWords: IWord[] = resCourse.words.map((item: any) => {
+  /* const resWords: IWord[] = resCourse.words.map((item: any) => {
     return {
       ...Object.fromEntries(
         Object.values(WordsProperties).map((val) => [
@@ -40,16 +43,18 @@ export const courseItemTransformer = <T extends { words: IWord[], tags: ITags[] 
       ),
     } as IWord
   })
-
+*/
   const tmp: Array<ICourseWords> = []
   tmp.push(course)
 
+  const resWords: IWord[] = [
+    ...wordsTransformer(tmp as ICourseWords[]),
+  ] as IWord[]
+
   const resTags: ITags[] = [...tagsTransformer(tmp as ICourseTags[])] as ITags[]
 
-
-  resCourse.words = [...resWords]
+  resCourse.words = [...lodash.orderBy(resWords, ["count"], ["asc"])]
   resCourse.tags = [...resTags]
-  
   return resCourse
 }
 export const courseItemRemove = <T extends { words: IWord[] }>(

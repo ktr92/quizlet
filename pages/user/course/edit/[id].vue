@@ -98,7 +98,12 @@ const idx = ref(0)
 
 const addnew = () => {
   idx.value++
-  newitems.value.push({ dt: "", dd: "", count: idx.value })
+  newitems.value.push({
+    dt: "",
+    dd: "",
+    count: idx.value,
+    id: String(Date.now() + idx.value + Math.random()),
+  })
 }
 const remove = (index: number) => {
   if (count.value > 1) {
@@ -151,7 +156,7 @@ const onSubmit = handleSubmit(async () => {
     body: {
       course_title: ctitle.value,
       course_tags: cdescription.value,
-      couesritem_words: newitems.value,
+      course_words: newitems.value,
       course_count: count.value,
       course_id: courseId.value,
     },
@@ -183,7 +188,7 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<ICourseWords>(`/api/course/${user.value.id}`, {
+} = await useFetch<ICourseTW>(`/api/course/${user.value.id}`, {
   query: {
     courseId: routeid,
   },
