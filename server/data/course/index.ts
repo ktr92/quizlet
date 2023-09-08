@@ -23,18 +23,44 @@ export async function getCourseById(userId: string, courseId: number) {
 
   return courses
 }
-export async function removeCourseById(userId: string, courseId: number) {
-  const courses = await prisma.courses.update({
-    data: {
-      course_archived: true,
+export async function removeCourseById(
+  userId: string,
+  courseId: number,
+  words: IWord[]
+) {
+  const relatedDelete = prisma.courses.update({
+    where: {
+      course_user: userId,
+      course_id: courseId,
     },
+    data: {
+      course_words: {
+        deleteMany: {},
+      },
+      course_tags: {
+        deleteMany: {},
+      },
+    },
+  })
+
+  const courseDelete = prisma.courses.delete({
     where: {
       course_user: userId,
       course_id: courseId,
     },
   })
 
-  return courses
+  const result = await prisma.$transaction([relatedDelete, courseDelete])
+
+  words.forEach(async (item: IWord) => {
+    await prisma.words.delete({
+      where: {
+        word_idcourse: item.id,
+      },
+    })
+  })
+
+  return result
 }
 
 export async function updateCourseById(userId: string, body: any) {
@@ -110,26 +136,17 @@ export async function updateCourseById(userId: string, body: any) {
       course_user: userId,
       course_id: body.course_id,
     },
-  })
+  }) */
 
-  body.couesritem_words.forEach(async (item: IWord) => {
-    await prisma.words.upsert({
-      update: {
-        word_dt: item.dt,
-        word_dd: item.dd,
-        word_count: item.count,
-      },
-      create: {
-        word_dt: item.dt,
-        word_dd: item.dd,
-        word_count: item.count,
-        courseitem_id: body.course_id,
-      },
-      where: {
-        courseitem_id: body.course_id,
-      },
+  if (body.removed_words.length) {
+    body.removed_words.forEach(async (item: IWord) => {
+      await prisma.words.delete({
+        where: {
+          word_idcourse: item.id,
+        },
+      })
     })
-  })  */
+  }
 
   return courses
 }

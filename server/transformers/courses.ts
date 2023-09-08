@@ -33,17 +33,7 @@ export const courseItemTransformer = <
       ])
     ),
   } as T
-  /* const resWords: IWord[] = resCourse.words.map((item: any) => {
-    return {
-      ...Object.fromEntries(
-        Object.values(WordsProperties).map((val) => [
-          val,
-          getValues(WordsProperties, item, val as string),
-        ])
-      ),
-    } as IWord
-  })
-*/
+
   const tmp: Array<ICourseWords> = []
   tmp.push(course)
 

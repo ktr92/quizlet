@@ -93,6 +93,7 @@ const routeid = route.params.id as string
 const user = useSupabaseUser()
 const ctitle = ref("")
 const cdescription = ref<string[]>([])
+const removedWords = ref<IWord[]>([])
 const idx = ref(0)
 /* const newitems = ref([{ dt: "", dd: "", count: 0 }]) */
 
@@ -107,6 +108,7 @@ const addnew = () => {
 }
 const remove = (index: number) => {
   if (count.value > 1) {
+    removedWords.value.push(newitems.value[index])
     newitems.value.splice(index, 1)
   }
 }
@@ -128,14 +130,14 @@ const courseId = computed(() => {
 })
 
 const schema = yup.object().shape({
-  newitems: yup.array().of(
+  /*   newitems: yup.array().of(
     yup.object().shape({
       dt: yup.string().required("Enter a value").max(200),
       dd: yup.string().required("Enter a value").max(200),
     })
-  ),
+  ), */
   ctitle: yup.string().required("Enter a title").min(1).max(100),
-  cdescription: yup.string().max(300),
+  /*  cdescription: yup.string().max(300), */
 })
 
 const { handleSubmit, errors } = useForm({
@@ -159,6 +161,7 @@ const onSubmit = handleSubmit(async () => {
       course_words: newitems.value,
       course_count: count.value,
       course_id: courseId.value,
+      removed_words: removedWords,
     },
     onRequest({ request, options }) {
       isLoading.value = true
@@ -182,7 +185,6 @@ const onSubmit = handleSubmit(async () => {
 
 const isLoading = ref(false)
 const someError = ref("")
-
 const {
   data: course,
   pending,

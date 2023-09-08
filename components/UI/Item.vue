@@ -11,12 +11,6 @@
           >
             {{ props.title }}
           </h3>
-          <div
-            v-if="props.count"
-            class="font-normal text-gray-700 dark:text-gray-400 w-fit md:w-fullw-full md:w-fit"
-          >
-            Items: {{ props.count }}
-          </div>
         </div>
         <div
           v-if="props.tags"

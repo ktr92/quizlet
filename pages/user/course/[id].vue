@@ -69,6 +69,7 @@ const removeCard = async () => {
     method: "DELETE",
     body: {
       courseId: routeid,
+      words: course.value?.words,
     },
     onRequest({ request, options }) {
       isLoading.value = true

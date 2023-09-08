@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <div>
-      <UIItemLink
+      <!--  <UIItemLink
         title="Add new course"
         url="/user/add"
         type="button"
-      ></UIItemLink>
+      ></UIItemLink> -->
       <template v-if="isLoading || pending">
         <UILoading />
       </template>
