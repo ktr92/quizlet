@@ -1,16 +1,17 @@
 <template>
   <div>
-    <div class="my-12">
+    <div class="">
       <div
-        class="md:text-5xl text-primary-800 dark:text-white font-bold mb-8 flex justify-between items-center"
+        class="md:text-5xl text-primary-800 dark:text-white font-bold flex justify-between items-center"
       >
-        <span>Adding new course</span>
+        <UITitle> Creating a new course </UITitle>
         <UIButton
-          size="md"
+          class=""
+          size="lg"
           :rounded="true"
           @click="onSubmit"
           v-if="!isLoading && !someError.length"
-          >Create course</UIButton
+          >Create</UIButton
         >
       </div>
     </div>
@@ -72,7 +73,9 @@
             </div>
           </div>
           <div class="my-8" @click="addnew">
-            <UIButton :liquid="true" :rounded="true">Add new word</UIButton>
+            <UIButton :liquid="true" :rounded="true" type="clear"
+              >Add new word</UIButton
+            >
           </div>
         </form>
       </template>

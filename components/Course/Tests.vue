@@ -12,7 +12,7 @@
     <div v-else>
       <div v-if="restItems && restItems.length && currentItem">
         <div
-          class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500 mt-4 mb-4"
+          class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-800 mt-4 mb-4"
         >
           <div class="text-white font-bold text-lg md:text-3xl text-center">
             {{ frontSide ? currentItemDD : currentItemDT }}
@@ -21,12 +21,12 @@
 
         <div class="flex flex-wrap">
           <div
-            class="w-[50%] p-2"
+            class="w-full md:w-[50%] p-2"
             v-for="option in options"
             :key="option.dt + count"
           >
             <div
-              class="p-2 md:-4 shadow rounded bg-white cursor-pointer hover:shadow-lg text-xs sm:text-base"
+              class="p-2 md:-4 shadow rounded bg-white dark:bg-primary-800 dark:text-white cursor-pointer hover:shadow-lg text-xs sm:text-base"
               :class="defaultTransition"
               @click="checkAnswer(option)"
               v-if="!answered || option.dt === currentItemDT"
@@ -50,12 +50,12 @@
           class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
         >
           <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
-            <UIIconbutton @some-event="randomize">
+            <UIIconbutton @some-event="randomize" tooltip="Random">
               <Icon name="uil:arrow-random" size="30" />
             </UIIconbutton>
           </div>
           <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-            <UIIconbutton @some-event="changeSide">
+            <UIIconbutton @some-event="changeSide" tooltip="changeSide">
               <Icon name="eva:flip-2-fill" size="30" />
             </UIIconbutton>
           </div>

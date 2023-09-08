@@ -1,7 +1,7 @@
 <template>
   <div>
     <UIItemLink
-      title="Add new course"
+      title="Create a new course"
       url="/user/add"
       type="button"
     ></UIItemLink>

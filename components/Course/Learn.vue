@@ -12,7 +12,7 @@
     <div v-else>
       <div v-if="restItems && restItems.length && currentItem">
         <div
-          class="shadow-lg rounded-xl p-8 bg-primary-500 dark:bg-primary-500 mt-4 mb-4"
+          class="shadow-lg rounded-xl py-8 px-2 md:p-8 bg-primary-500 dark:bg-primary-800 mt-4 mb-4"
         >
           <div
             class="flex items-center justify-center text-lg md:text-3xl font-bold pb-8 text-white"
@@ -35,12 +35,12 @@
             class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
           >
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
-              <UIIconbutton @some-event="randomize">
+              <UIIconbutton @some-event="randomize" tooltip="Random">
                 <Icon name="uil:arrow-random" size="30" />
               </UIIconbutton>
             </div>
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-              <UIIconbutton @some-event="changeSide">
+              <UIIconbutton @some-event="changeSide" tooltip="Change Side">
                 <Icon name="eva:flip-2-fill" size="30" />
               </UIIconbutton>
             </div>
@@ -58,12 +58,22 @@
             class="flex py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-center"
           >
             <div class="ml-1 md:ml-4 w-[50%]">
-              <UIIconbutton @some-event="skipcard" bg="#efadad" bghover="">
+              <UIIconbutton
+                @some-event="skipcard"
+                bg="#efadad"
+                bghover=""
+                tooltip="Skip"
+              >
                 <Icon name="fluent:skip-forward-tab-24-regular" size="30" />
               </UIIconbutton>
             </div>
             <div class="ml-1 md:ml-4 w-[50%]">
-              <UIIconbutton @some-event="nextcard" bg="#c4eac4" bghover="">
+              <UIIconbutton
+                @some-event="nextcard"
+                bg="#c4eac4"
+                bghover=""
+                tooltip="Check"
+              >
                 <Icon name="heroicons-solid:check" size="30" />
               </UIIconbutton>
             </div>

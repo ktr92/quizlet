@@ -6,6 +6,7 @@
           <Icon name="simple-line-icons:options-vertical" size="30" />
         </UIIconbutton>
       </div> -->
+
       <div class="" v-if="iscomponent">
         <UIIconbutton
           @some-event="iscomponent = false"
@@ -17,49 +18,53 @@
         </UIIconbutton>
       </div>
 
-      <div
-        v-if="!iscomponent"
-        class="py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-end flex"
-      >
-        <div class="ml-1 md:ml-4">
-          <UIIconbutton
-            @some-event="exportItem"
-            bg="#efadad"
-            bghover=""
-            tooltip="Export"
-          >
-            <Icon name="bx:export" size="30" />
-          </UIIconbutton>
-        </div>
-        <div class="ml-1 md:ml-4">
-          <UIIconbutton
-            @some-event="importItem"
-            bg="#efadad"
-            bghover=""
-            tooltip="Import"
-          >
-            <Icon name="bx:import" size="30" />
-          </UIIconbutton>
-        </div>
-        <div class="ml-1 md:ml-4">
-          <UIIconbutton
-            @some-event="editItem"
-            bg="#efadad"
-            bghover=""
-            tooltip="Edit"
-          >
-            <Icon name="ep:edit" size="30" />
-          </UIIconbutton>
-        </div>
-        <div class="ml-1 md:ml-4">
-          <UIIconbutton
-            @some-event="removeItem"
-            bg="#efadad"
-            bghover=""
-            tooltip="Remove"
-          >
-            <Icon name="fluent:delete-48-regular" size="30" />
-          </UIIconbutton>
+      <div class="flex items-center justify-between">
+        <UITitle v-if="!iscomponent">{{ course.title }}</UITitle>
+
+        <div
+          v-if="!iscomponent"
+          class="py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-end flex"
+        >
+          <div class="ml-1 md:ml-4">
+            <UIIconbutton
+              @some-event="exportItem"
+              bg="#efadad"
+              bghover=""
+              tooltip="Export"
+            >
+              <Icon name="bx:export" size="30" />
+            </UIIconbutton>
+          </div>
+          <div class="ml-1 md:ml-4">
+            <UIIconbutton
+              @some-event="importItem"
+              bg="#efadad"
+              bghover=""
+              tooltip="Import"
+            >
+              <Icon name="bx:import" size="30" />
+            </UIIconbutton>
+          </div>
+          <div class="ml-1 md:ml-4">
+            <UIIconbutton
+              @some-event="editItem"
+              bg="#efadad"
+              bghover=""
+              tooltip="Edit"
+            >
+              <Icon name="ep:edit" size="30" />
+            </UIIconbutton>
+          </div>
+          <div class="ml-1 md:ml-4">
+            <UIIconbutton
+              @some-event="removeItem"
+              bg="#efadad"
+              bghover=""
+              tooltip="Remove"
+            >
+              <Icon name="fluent:delete-48-regular" size="30" />
+            </UIIconbutton>
+          </div>
         </div>
       </div>
 

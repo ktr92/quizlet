@@ -17,7 +17,7 @@
         type="text"
         v-model="currentTag"
         placeholder="Enter Tags (optional)"
-        class="tag-input border-0 h-full outline-0 w-[50%]"
+        class="tag-input border-0 h-full outline-0 w-[50%] dark:bg-gray-700 dark:text-white"
         @keydown.enter="addTag"
         @keydown.188="addTag"
         @keydown.delete="removeLastTag"

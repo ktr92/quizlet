@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex items-center justify-center opacity-50 h-20"
+    class="flex items-center justify-center opacity-50 dark:opacity-50 h-20"
     :class="{
-      'h-screen fixed top-0 w-full bg-white z-50': full,
+      'h-screen fixed top-0 w-full bg-white dark:bg-primary-900 z-50': full,
       'h-20 py-6': !full,
     }"
   >

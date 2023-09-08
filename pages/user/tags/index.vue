@@ -1,8 +1,10 @@
 <template>
   <div>
+    <UITitle> Your tags: </UITitle>
     <div v-for="tag in tags" class="w-full">
       <NuxtLink :to="'/user/tag/' + tag.title" class="cursor-pointer">
-        <div
+        <UIItem :title="tag.title"></UIItem>
+        <!-- <div
           class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
         >
           <h3
@@ -10,7 +12,7 @@
           >
             {{ tag.title }}
           </h3>
-        </div>
+        </div> -->
       </NuxtLink>
     </div>
   </div>

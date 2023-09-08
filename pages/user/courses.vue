@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <div>
-      <UIItemLink
+      <!-- <UIItemLink
         title="Add new course"
         url="/user/add"
         type="button"
-      ></UIItemLink>
+      ></UIItemLink> -->
       <template v-if="isLoading || pending">
         <UILoading />
       </template>
@@ -14,9 +14,15 @@
           <Errors :errors="someError + error" />
         </template>
         <template v-else>
+          <UITitle> Your courses: </UITitle>
           <div v-for="card in courses" class="w-full relative">
             <NuxtLink :to="'/user/course/' + card.id" class="cursor-pointer">
-              <div
+              <UIItem
+                :tags="card.tags"
+                :title="card.title"
+                :count="card.count"
+              ></UIItem>
+              <!-- <div
                 class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
               >
                 <div
@@ -46,7 +52,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </NuxtLink>
           </div>
         </template>

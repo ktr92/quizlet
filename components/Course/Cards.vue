@@ -16,7 +16,7 @@
         >
           <div
             v-if="!flipped"
-            class="absolute text-center py-16 bg-primary-500 dark:bg-primary-500 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard w-full mx-auto flex items-center justify-center"
+            class="absolute text-center py-16 bg-primary-500 dark:bg-primary-800 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard w-full mx-auto flex items-center justify-center"
             @click="flip"
           >
             <div class="text-lg md:text-5xl">
@@ -185,28 +185,28 @@ const randomize = () => {
 
 <style scoped>
 .animated {
-  animation-duration: 0.8s;
+  animation-duration: 0.2s;
   animation-fill-mode: both;
 }
 @keyframes flipInX {
   from {
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
     animation-timing-function: ease-in;
     opacity: 0;
   }
-  40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+  /*  40% {
+    transform: perspective(1000px) rotate3d(1, 0, 0, 20deg);
     animation-timing-function: ease-in;
   }
   60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(1000px) rotate3d(1, 0, 0, 20deg);
     opacity: 1;
   }
   80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
+    transform: perspective(1000px) rotate3d(1, 0, 0, 20deg);
+  } */
   to {
-    transform: perspective(400px);
+    transform: perspective(1000px);
   }
 }
 
