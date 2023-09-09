@@ -5,14 +5,35 @@
         class="md:text-5xl text-primary-800 dark:text-white font-bold flex justify-between items-center"
       >
         <UITitle> Creating a new course </UITitle>
-        <UIButton
-          class=""
-          size="lg"
-          :rounded="true"
-          @click="onSubmit"
-          v-if="!isLoading && !someError.length"
-          >Create</UIButton
-        >
+        <div class="flex items-center">
+          <div class="ml-1 md:ml-4">
+            <label for="fileupload">
+              <UIIconbutton
+                @some-event="importItem"
+                tooltip="Import"
+                classes="mr-4 w-12 h-12 md:!p-0 flex items-center justify-center"
+                type="round"
+              >
+                <Icon name="bx:import" size="30" />
+                <input
+                  type="file"
+                  id="fileupload"
+                  @change="onFileChange"
+                  class="hidden"
+                />
+              </UIIconbutton>
+            </label>
+          </div>
+          <UIButton
+            class=""
+            size="lg"
+            :rounded="true"
+            @click="onSubmit"
+            v-if="!isLoading && !someError.length"
+            >Create</UIButton
+          >
+        </div>
+        <!-- /.flex -->
       </div>
     </div>
 
@@ -117,6 +138,65 @@ const remove = (index: number) => {
 const count = computed(() => {
   return newitems.value.length
 })
+
+const importItem = () => {}
+
+const fileinput = ref("")
+
+const onFileChange = (e: any) => {
+  isLoading.value = true
+  function createInput(file: any) {
+    let promise = new Promise((resolve, reject) => {
+      let reader = new FileReader()
+      reader.onload = (e) => {
+        resolve((fileinput.value = reader.result as string))
+      }
+      reader.readAsText(file)
+    })
+
+    promise
+      .then(
+        (result) => {
+          fileToWords()
+        },
+        (error) => {
+          someError.value = "File upload error! " + error
+        }
+      )
+      .finally(() => {
+        isLoading.value = false
+      })
+  }
+  if (e.target) {
+    var files = e.target.files || e.dataTransfer.files
+    if (!files.length) {
+      return
+    }
+    createInput(files[0])
+  }
+}
+
+const fileToWords = () => {
+  newitems.value = []
+  const splitted = fileinput.value.split("\r\n")
+  const result = splitted.map((e) => {
+    let keyVal = e.split(",")
+    return { dt: keyVal[0], dd: keyVal[1] }
+  })
+
+  const filled: IWord[] = []
+
+  result.forEach((item) => {
+    idx.value++
+    filled.push({
+      dt: item.dt,
+      dd: item.dd,
+      count: idx.value,
+      id: String(Date.now() + idx.value + Math.random()),
+    })
+  })
+  newitems.value = filled
+}
 
 const schema = yup.object().shape({
   /*   newitems: yup

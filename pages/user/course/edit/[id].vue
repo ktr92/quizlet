@@ -1,85 +1,83 @@
 <template>
   <div>
-    <div>
-      <template v-if="isLoading">
-        <UILoading />
+    <template v-if="compLoading">
+      <UILoading />
+    </template>
+    <template v-else>
+      <template v-if="compError.length">
+        <Errors :errors="compError" />
       </template>
       <template v-else>
-        <template v-if="someError.length">
-          <Errors :errors="someError" />
-        </template>
-        <template v-else>
-          <div v-if="course">
-            <div class="my-12">
-              <div
-                class="md:text-5xl text-primary-800 dark:text-white font-bold mb-8 flex justify-between items-center"
+        <div v-if="course">
+          <div class="my-12">
+            <div
+              class="md:text-5xl text-primary-800 dark:text-white font-bold mb-8 flex justify-between items-center"
+            >
+              <span>{{ resTitle }} [editing]</span>
+              <UIButton size="md" :rounded="true" @click="onSubmit"
+                >Save</UIButton
               >
-                <span>{{ resTitle }} [editing]</span>
-                <UIButton size="md" :rounded="true" @click="onSubmit"
-                  >Save</UIButton
-                >
-              </div>
             </div>
+          </div>
 
-            <form @submit="onSubmit">
-              <UIInput
-                v-model="ctitle"
-                placeholder="Course title"
-                name="ctitle"
-              ></UIInput>
+          <form @submit="onSubmit">
+            <UIInput
+              v-model="ctitle"
+              placeholder="Course title"
+              name="ctitle"
+            ></UIInput>
 
-              <UITagsInput
-                v-model="cdescription"
-                :initialTags="resDescription"
-                :options="['Hello', 'World']"
-                :showCount="true"
-              ></UITagsInput>
+            <UITagsInput
+              v-model="cdescription"
+              :initialTags="resDescription"
+              :options="['Hello', 'World']"
+              :showCount="true"
+            ></UITagsInput>
 
-              <div
-                class="my-4"
-                v-for="(field, index) in newitems"
-                :key="field.count"
-              >
-                <div class="bg-white dark:bg-gray-700 rounded-lg">
-                  <div class="flex justify-between px-4 py-2">
-                    <div></div>
-                    <div>
-                      <div
-                        @click="remove(index)"
-                        class="cursor-pointer"
-                        :class="{ 'opacity-30': count < 2 }"
-                      >
-                        <Icon name="pajamas:remove" size="20"></Icon>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.flex -->
-                  <div class="flex mb-4 pb-4 flex-wrap md:flex-nowrap">
-                    <div class="px-2 w-full md:w-[50%] md:mr-2">
-                      <UIInput
-                        v-model="newitems[index].dt"
-                        placeholder="Term"
-                        :name="`newitems[${index}].dt`"
-                      ></UIInput>
-                    </div>
-                    <div class="px-2 w-full md:w-[50%] md:ml-2">
-                      <UIInput
-                        v-model="newitems[index].dd"
-                        placeholder="Value"
-                        :name="`newitems[${index}].dd`"
-                      ></UIInput>
+            <div
+              class="my-4"
+              v-for="(field, index) in newitems"
+              :key="field.count"
+            >
+              <div class="bg-white dark:bg-gray-700 rounded-lg">
+                <div class="flex justify-between px-4 py-2">
+                  <div></div>
+                  <div>
+                    <div
+                      @click="remove(index)"
+                      class="cursor-pointer"
+                      :class="{ 'opacity-30': count < 2 }"
+                    >
+                      <Icon name="pajamas:remove" size="20"></Icon>
                     </div>
                   </div>
                 </div>
+                <!-- /.flex -->
+                <div class="flex mb-4 pb-4 flex-wrap md:flex-nowrap">
+                  <div class="px-2 w-full md:w-[50%] md:mr-2">
+                    <UIInput
+                      v-model="newitems[index].dt"
+                      placeholder="Term"
+                      :name="`newitems[${index}].dt`"
+                    ></UIInput>
+                  </div>
+                  <div class="px-2 w-full md:w-[50%] md:ml-2">
+                    <UIInput
+                      v-model="newitems[index].dd"
+                      placeholder="Value"
+                      :name="`newitems[${index}].dd`"
+                    ></UIInput>
+                  </div>
+                </div>
               </div>
-              <div class="my-8" @click="addnew">
-                <UIButton :liquid="true" :rounded="true">Add new word</UIButton>
-              </div>
-            </form>
-          </div>
-        </template>
+            </div>
+            <div class="my-8" @click="addnew">
+              <UIButton :liquid="true" :rounded="true">Add new word</UIButton>
+            </div>
+          </form>
+        </div>
       </template>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -88,6 +86,7 @@ import { useForm } from "vee-validate"
 import { useRoute } from "vue-router"
 import * as yup from "yup"
 
+const { compLoading, compError, mainStore } = useStoreState()
 const route = useRoute()
 const routeid = route.params.id as string
 const user = useSupabaseUser()
@@ -164,18 +163,21 @@ const onSubmit = handleSubmit(async () => {
       removed_words: removedWords,
     },
     onRequest({ request, options }) {
-      isLoading.value = true
+      /*     isLoading.value = true */
+      mainStore.setLoading(true)
       course.value = null
     },
     onRequestError({ request, options, error }) {
       someError.value = "Request error! " + error.message
     },
     onResponse({ request, response, options }) {
-      isLoading.value = false
+      /*  isLoading.value = false */
+      mainStore.setLoading(false)
       console.log(response._data.title)
     },
     onResponseError({ request, response, options }) {
-      isLoading.value = false
+      /*  isLoading.value = false */
+      mainStore.setLoading(false)
       someError.value = "Response error! " + response.statusText
     },
   })
@@ -195,18 +197,21 @@ const {
     courseId: routeid,
   },
   onRequest({ request, options }) {
-    isLoading.value = true
+    /*  isLoading.value = true */
+    mainStore.setLoading(true)
   },
   onRequestError({ request, options, error }) {
     someError.value = error.message
   },
   onResponse({ request, response, options }) {
-    isLoading.value = false
+    /* isLoading.value = false */
+    mainStore.setLoading(false)
     someError.value = ""
     ctitle.value = response._data.title
   },
   onResponseError({ request, response, options }) {
-    isLoading.value = false
+    /*  isLoading.value = false */
+    mainStore.setLoading(false)
     someError.value = response.statusText
   },
 })

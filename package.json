@@ -26,6 +26,7 @@
     "nuxt-lodash": "^2.5.0",
     "pinia": "^2.1.6",
     "vee-validate": "^4.11.3",
+    "vue-csv-import": "^4.1.2",
     "yup": "^1.2.0"
   }
 }

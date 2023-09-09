@@ -35,7 +35,7 @@
               <Icon name="bx:export" size="30" />
             </UIIconbutton>
           </div>
-          <div class="ml-1 md:ml-4">
+          <!-- <div class="ml-1 md:ml-4">
             <UIIconbutton
               @some-event="importItem"
               bg="#efadad"
@@ -44,7 +44,7 @@
             >
               <Icon name="bx:import" size="30" />
             </UIIconbutton>
-          </div>
+          </div> -->
           <div class="ml-1 md:ml-4">
             <UIIconbutton
               @some-event="editItem"
