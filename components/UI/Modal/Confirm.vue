@@ -17,7 +17,7 @@
         <slot name="actions" :emit-result="emitResult">
           <div class="flex justify-end gap-2">
             <UIButton
-              class="bg-indigo-200 px-3 py-1 font-medium"
+              class="bg-indigo-200 px-3 py-1 font-medium rounded"
               @click="$emit('result', false)"
             >
               Cancel
@@ -25,7 +25,7 @@
 
             <UIButton
               type="danger"
-              class="bg-indigo-200 px-3 py-1 font-medium"
+              class="bg-indigo-200 px-3 py-1 font-medium rounded"
               @click="$emit('result', true)"
             >
               Yes
