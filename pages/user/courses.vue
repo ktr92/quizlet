@@ -91,6 +91,8 @@ const {
     someError.value = response.statusText
   },
 })
+
+watchEffect(async () => {})
 </script>
 
 <style scoped></style>

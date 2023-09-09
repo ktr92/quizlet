@@ -9,11 +9,14 @@
         >
           <div class="hidden md:block">
             <div v-if="user">
-              <ul class="-mx-4 flex">
+              <ul class="-mx-4 flex items-center">
                 <li class="px-4">
-                  <UIButton class="rounded">
-                    <NuxtLink to="/user/add/">Create course</NuxtLink>
-                  </UIButton>
+                  <NuxtLink
+                    to="/user/add/"
+                    class="text-white focus:ring-4 !outline-none focus:!outline-none font-medium px-[15px] py-1 md:py-[10px] text-md text-center cursor-pointer whitespace-nowrap bg-primary-600 text-white dark:bg-primary-500 hover:bg-primary-300 rounded"
+                  >
+                    Create course
+                  </NuxtLink>
                 </li>
                 <li class="px-4">
                   <NuxtLink

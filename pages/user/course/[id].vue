@@ -15,6 +15,17 @@
             @remove="removeCard"
             @update="editItem"
           />
+          <ClientOnly>
+            <UIModalConfirm :show="showDialog" @result="handleModal">
+              <template #title>
+                Removing course
+                <span class="text-primary-500">{{
+                  course.title
+                }}</span></template
+              >
+              <template #text> Are you sure? </template>
+            </UIModalConfirm>
+          </ClientOnly>
         </div>
       </template>
     </template>
@@ -31,6 +42,7 @@ definePageMeta({
 const route = useRoute()
 const routeid = route.params.id as string
 const user = useSupabaseUser()
+const showDialog = ref(false)
 
 const isLoading = ref(false)
 const someError = ref("")
@@ -59,7 +71,8 @@ const {
   },
 })
 
-const removeCard = async () => {
+const removeApi = async () => {
+  showDialog.value = true
   const {
     data: courseRemoved,
     pending,
@@ -86,7 +99,18 @@ const removeCard = async () => {
       someError.value = "Response error! " + response.statusText
     },
   })
-  navigateTo("/user/courses")
+}
+
+const removeCard = async () => {
+  showDialog.value = true
+}
+async function handleModal(value: boolean) {
+  showDialog.value = false
+
+  if (value) {
+    await removeApi()
+    navigateTo("/user/courses")
+  }
 }
 
 const editItem = () => {
