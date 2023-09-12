@@ -15,14 +15,15 @@
         </template>
         <template v-else>
           <UITitle> Your courses: </UITitle>
-          <div v-for="card in courses" class="w-full relative">
-            <NuxtLink :to="'/user/course/' + card.id" class="cursor-pointer">
-              <UIItem
-                :tags="card.tags"
-                :title="card.title"
-                :count="card.count"
-              ></UIItem>
-              <!-- <div
+          <template v-if="courses && courses.length">
+            <div v-for="card in courses" class="w-full relative">
+              <NuxtLink :to="'/user/course/' + card.id" class="cursor-pointer">
+                <UIItem
+                  :tags="card.tags"
+                  :title="card.title"
+                  :count="card.count"
+                ></UIItem>
+                <!-- <div
                 class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
               >
                 <div
@@ -53,8 +54,21 @@
                   </div>
                 </div>
               </div> -->
-            </NuxtLink>
-          </div>
+              </NuxtLink>
+            </div>
+          </template>
+          <template v-else>
+            <div class="text-2xl block mb-4">
+              <span class="block"
+                >The are no courses yet... You may create a new one right now
+              </span>
+            </div>
+            <div>
+              <UIButton @onclick="navigateTo('add')" size="lg" :rounded="true"
+                >Create course</UIButton
+              >
+            </div>
+          </template>
         </template>
       </template>
     </div>
@@ -76,7 +90,7 @@ const {
   pending,
   error,
   refresh,
-} = await useFetch<ICourseTags>(`/api/courses/${user.value.id}`, {
+} = await useFetch<ICourseTags[]>(`/api/courses/${user.value.id}`, {
   onRequest({ request, options }) {
     isLoading.value = true
   },
