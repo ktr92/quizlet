@@ -29,7 +29,7 @@
               @click="auth('google')"
               class="flex items-center justify-center gap-3 p-1.5 w-full bg-gray-100 hover:bg-gray-200 rounded-full text-lg font-semibold transition ease-in-out duration-350 dark:bg-gray-900 dark:hover:bg-primary-900 focus:bg-gray-200 dark:focus"
             >
-              <img src="google-logo.svg" alt="" class="w-8" />
+              <img src="/google-logo.svg" alt="" class="w-8" />
               <div class="text-primary-600">Google</div>
             </button>
 
