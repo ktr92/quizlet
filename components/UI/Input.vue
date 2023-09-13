@@ -6,7 +6,7 @@
       :value="inputValue"
       :placeholder="props.placeholder"
       @input="(event) => onChange(event)"
-      @keyup.enter="$emit('onEnter')"
+      @keyup.enter="onEnter"
       @blur="handleBlur"
       class="w-full px-4 border-0 border-b-4 border-slate-400 hover:border-slate-500 focus:border-b-primary-500 outline-none transition-all h-10 dark:bg-gray-700 dark:text-white"
     />
@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { useField } from "vee-validate"
-const emits = defineEmits(["update:modelValue"])
+const emits = defineEmits(["update:modelValue", "onEnter"])
 const props = defineProps({
   modelValue: {
     type: String,
@@ -50,8 +50,17 @@ const {
   valueProp: props.modelValue,
 })
 
+const onEnter = () => {
+  emits("onEnter")
+}
+
 const onChange = (event: Event) => {
   handleChange(event, true)
   emits("update:modelValue", (<HTMLTextAreaElement>event.target).value)
 }
+
+const valueProp = computed(() => props.modelValue)
+watchEffect(() => {
+  inputValue.value = valueProp.value
+})
 </script>

@@ -152,7 +152,7 @@ watch(count, (newValue, oldValue) => {
 })
 
 const isvalid = computed(() => {
-  return answer.value === currentItemDD.value
+  return answer.value.toLowerCase() === currentItemDD.value.toLowerCase()
 })
 
 const nextcard = () => {
@@ -160,6 +160,7 @@ const nextcard = () => {
 
   if (isvalid.value) {
     answered.value = false
+    answer.value = ""
     makeknown()
   } else {
     let isnew = wrongAnswers.value.filter(
@@ -169,7 +170,6 @@ const nextcard = () => {
       wrongAnswers.value.push(currentItem.value)
     }
   }
-  answer.value = ""
 }
 
 const skipcard = () => {
