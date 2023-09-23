@@ -27,6 +27,10 @@
       </div>
     </div>
         <div>
+          <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700 my-12">
+            <div class="bg-[#423ed8] text-md font-medium text-blue-100 text-center p-2 leading-none rounded-full" :style='"width: " + barWidthCalculated + "%"'> {{ barWidthCalculated }} %</div>
+          </div>
+
           <div v-if="falseItems?.length">
             <h3 class="text-xl font-bold text-red-400">Wrong answers</h3>
           <UITable :items='falseItems'></UITable>
@@ -67,8 +71,17 @@ const props = defineProps({
   falseItems: {
     type: Array<IWord>,
     required: false
+  },
+  count: {
+    type: Number,
+    default: 0,
   }
 })
+
+const barWidthCalculated = computed(() => {
+  return props.falseItems ? (props.count - props.falseItems.length) / props.count * 100 : 0
+})
+
 </script>
 
 <style scoped></style>

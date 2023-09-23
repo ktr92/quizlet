@@ -5,6 +5,7 @@
         :condition2="!!restItems.length"
         :trueItems='trueItems'
         :falseItems='falseItems'
+        :count='items.length'
         @some-event1="restart"
         @some-event2="learnmore"
         text1="Начать заново"
