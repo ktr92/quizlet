@@ -1,0 +1,1 @@
+import{f as a,g as n,h as t,o,c as r,n as s}from"./entry.ff4e4d2d.js";const f=a({__name:"confirm",setup(c){const e=n();return t(e,()=>{if(e.value)return s("/")},{immediate:!0}),(i,u)=>(o(),r("div",null,"Waiting for login..."))}});export{f as default};

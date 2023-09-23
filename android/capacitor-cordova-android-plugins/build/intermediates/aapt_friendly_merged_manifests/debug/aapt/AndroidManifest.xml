@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:amazon="http://schemas.amazon.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="capacitor.cordova.android.plugins" >
+
+    <uses-sdk android:minSdkVersion="22" />
+
+    <application>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.16" />
+    </application>
+
+</manifest>
