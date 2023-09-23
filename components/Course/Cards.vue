@@ -3,6 +3,8 @@
     <div v-if="isFinish">
       <CourseNavigation
         :condition2="!!restItems.length"
+        :trueItems='trueItems'
+        :falseItems='falseItems'
         @some-event1="restart"
         @some-event2="learnmore"
         text1="Начать заново"
@@ -62,6 +64,15 @@
             </div>
           </div>
 
+
+           <div
+            class="flex max-auto my-2 md:my-2 justify-center dark:text-white text-xl items-center"
+          >
+            <div class="mx-2 md:mx-4">
+             <span class="text-[#08BB3C] font-bold">{{  count - falseItems.length }}</span>  / <span class="font-bold text-[#F1350D]">{{ falseItems.length }}</span> 
+            </div>
+          </div>
+
           <div
             class="flex py-2 md:py-2 xs-auto md:w-p[900px] items-center justify-center"
           >
@@ -105,6 +116,7 @@ import { useMainStore } from "@/stores/mainstore"
 const mainStore = useMainStore()
 
 let restItems = ref([...props.items])
+let falseItems = ref<IWord[]>([])
 const items = [...props.items]
 let initialItems = [...props.items]
 
@@ -154,6 +166,7 @@ const reinit = () => {
   count.value = 0
   current.value = 0
   isFinish.value = false
+  falseItems.value = []
 }
 
 watch(count, (newValue, oldValue) => {
@@ -165,10 +178,15 @@ watch(count, (newValue, oldValue) => {
 })
 
 const nextcard = () => {
+  falseItems.value.push(currentItem.value)
   current.value += 1
   count.value += 1
   flipped.value = false
 }
+
+const trueItems = computed(() => {
+  return  useDifference(props.items, falseItems.value)
+})
 
 const makeknown = () => {
   restItems.value.splice(current.value, 1)
