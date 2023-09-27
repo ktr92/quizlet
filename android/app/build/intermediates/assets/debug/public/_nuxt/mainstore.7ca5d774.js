@@ -1,1 +1,0 @@
-import{al as e}from"./entry.ff4e4d2d.js";const a=e("mainstore",{state:()=>({loading:!1,iserror:"",dark:!1,user:!1}),getters:{getLoading:r=>r.loading,getMode:r=>r.dark,getError:r=>r.iserror},actions:{changeMode(){this.dark=!this.dark},setError(r){this.iserror=r},setLoading(r){this.loading=r}}});export{a as u};

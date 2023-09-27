@@ -1,1 +1,0 @@
-import{_ as t}from"./page.27ace5d0.js";import{u as r}from"./mainstore.7ca5d774.js";import{f as n,r as s,o as c,c as m,b as _,y as p,m as i}from"./entry.ff4e4d2d.js";import"./defu.5a7c1433.js";const B=n({__name:"auth",setup(u){const e=r(),o=s(e.dark);return(f,d)=>{const a=t;return c(),m("div",{class:p({dark:i(o)})},[_(a)],2)}}});export{B as default};
