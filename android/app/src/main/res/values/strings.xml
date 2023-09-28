@@ -3,5 +3,5 @@
     <string name="app_name">nuxt-app</string>
     <string name="title_activity_main">nuxt-app</string>
     <string name="package_name">nuxt.app</string>
-    <string name="custom_url_scheme">nuxt.app</string>
+    <string name="custom_url_scheme">wordcard/</string>
 </resources>
