@@ -100,6 +100,9 @@
                 size="22"
               ></Icon>
             </UIIconbutton>
+            <Language />
+            <p>{{ $t("welcome") }}</p>
+
             <NuxtLink
               v-if="!user"
               :class="defaultTransition"

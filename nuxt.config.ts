@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
@@ -9,6 +8,7 @@ export default defineNuxtConfig({
     "nuxt-lodash",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/supabase",
+    "@nuxtjs/i18n",
   ],
   pinia: {
     autoImports: [
@@ -17,7 +17,11 @@ export default defineNuxtConfig({
       ["defineStore", "definePiniaStore"], // import { defineStore as definePiniaStore } from 'pinia'
     ],
   },
+  i18n: {
+    locales: ["en", "ru"], // used in URL path prefix
+    defaultLocale: "ru", // default locale of your project for Nuxt pages and routings
+  },
   supabase: {
-    redirect: false
-  }
+    redirect: false,
+  },
 })
