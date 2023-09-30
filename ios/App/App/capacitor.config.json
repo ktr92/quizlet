@@ -1,6 +1,6 @@
 {
-	"appId": "nuxt.app",
-	"appName": "nuxt-app",
+	"appId": "wordcard",
+	"appName": "wordcard",
 	"webDir": "dist",
 	"server": {
 		"androidScheme": "https"

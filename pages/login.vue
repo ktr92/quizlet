@@ -113,9 +113,11 @@ const auth = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
-      redirectTo: "wordcard://confirm",
+      redirectTo: "/confirm",
     },
   })
+
+  
 
 }
 </script>
