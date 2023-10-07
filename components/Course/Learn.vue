@@ -19,7 +19,7 @@
           >
             {{ currentItemDT }}
           </div>
-          <div>
+          <div :class="{ valid: isvalid }">
             <UIInput v-model="answer" @onEnter="nextcard"></UIInput>
           </div>
           <div
@@ -88,6 +88,8 @@
 </template>
 
 <script setup lang="ts">
+import timeout from "@/utils/timeout"
+
 const props = defineProps({
   items: {
     type: Array<ICard>,
@@ -158,12 +160,14 @@ const isvalid = computed(() => {
   return answer.value.toLowerCase() === currentItemDD.value.toLowerCase()
 })
 
-const nextcard = () => {
+const nextcard = async () => {
   answered.value = true
 
   if (isvalid.value) {
+    await timeout(500)
     answered.value = false
     answer.value = ""
+
     makeknown()
   } else {
     let isnew = wrongAnswers.value.filter(
@@ -192,4 +196,28 @@ const randomize = () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.valid ::v-deep input {
+  animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  @apply border-green-700;
+}
+@keyframes valid {
+  10%,
+  90% {
+    transform: scale(1.02);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: scale(1.03);
+  }
+
+  40%,
+  60% {
+    transform: scale(1.05);
+  }
+}
+</style>

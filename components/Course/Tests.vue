@@ -28,7 +28,7 @@
               class="p-2 md:-4 shadow rounded bg-white dark:bg-primary-800 dark:text-white cursor-pointer hover:shadow-lg text-xs sm:text-base"
               :class="[
                 defaultTransition,
-                { shake: isvalid && option.dt === currentItemDT },
+                { valid: isvalid && option.dt === currentItemDT },
               ]"
               @click="checkAnswer(option)"
               v-if="!answered || option.dt === currentItemDT"
@@ -206,7 +206,7 @@ const randomize = () => {
 </script>
 
 <style scoped>
-.shake {
+.valid {
   animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   backface-visibility: hidden;
   transition: all 0.2s ease;

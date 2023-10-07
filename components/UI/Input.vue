@@ -8,7 +8,7 @@
       @input="(event) => onChange(event)"
       @keyup.enter="onEnter"
       @blur="handleBlur"
-      class="w-full px-4 border-0 border-b-4 border-slate-400 hover:border-slate-500 focus:border-b-primary-500 outline-none transition-all h-10 dark:bg-gray-700 dark:text-white"
+      class="tracking-widest w-full px-4 border-0 border-b-4 border-slate-400 hover:border-slate-500 focus:border-b-primary-500 outline-none transition-all h-10 dark:bg-gray-700 dark:text-white"
     />
     <span v-if="errorMessage && meta.touched" class="text-red-700 text-sm">{{
       errorMessage
