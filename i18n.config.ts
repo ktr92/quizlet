@@ -31,6 +31,7 @@ export default defineI18nConfig(() => ({
       skip: "skip",
       changeside: "Change side",
       check: "Check",
+      coursesby: "Modules by",
     },
     ru: {
       createcourse: "Создать модуль",
@@ -61,6 +62,7 @@ export default defineI18nConfig(() => ({
       skip: "Пропустить",
       changeside: "Перевернуть",
       check: "Проверить",
+      coursesby: "Модули с тегом",
     },
   },
 }))

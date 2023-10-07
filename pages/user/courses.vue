@@ -67,7 +67,10 @@
               </span>
             </div>
             <div>
-              <UIButton @onclick="navigateTo('add')" size="lg" :rounded="true"
+              <UIButton
+                @onclick="navigateTo(localePath('add'))"
+                size="lg"
+                :rounded="true"
                 >Create course</UIButton
               >
             </div>

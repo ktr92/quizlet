@@ -1,11 +1,12 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
+const localePath = useLocalePath()
 
 watch(
   user,
   () => {
     if (user.value) {
-      return navigateTo("/user")
+      return navigateTo(localePath("/user"))
     }
   },
   { immediate: true }

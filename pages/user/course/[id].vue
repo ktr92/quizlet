@@ -38,6 +38,7 @@ import { useRoute } from "vue-router"
 definePageMeta({
   middleware: ["auth"],
 })
+const localePath = useLocalePath()
 
 const route = useRoute()
 const routeid = route.params.id as string
@@ -109,12 +110,12 @@ async function handleModal(value: boolean) {
 
   if (value) {
     await removeApi()
-    navigateTo("/user/courses")
+    navigateTo(localePath("/user/courses"))
   }
 }
 
 const editItem = () => {
-  navigateTo(`/user/course/edit/${routeid}`)
+  navigateTo(localePath(localePath(`/user/course/edit/${routeid}`)))
 }
 </script>
 

@@ -107,6 +107,7 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate"
 import * as yup from "yup"
+const localePath = useLocalePath()
 
 const user = useSupabaseUser()
 const ctitle = ref("")
@@ -247,7 +248,7 @@ const onSubmit = handleSubmit(async () => {
     },
   })
 
-  navigateTo("/user/courses/")
+  navigateTo(localePath("/user/courses/"))
 }, failValidation)
 </script>
 

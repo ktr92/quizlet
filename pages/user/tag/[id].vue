@@ -15,7 +15,9 @@
         </template>
         <template v-else>
           <UITitle>
-            Courses by&nbsp;<span class="font-normal text-primary-500">
+            {{ $t("coursesby") }}&nbsp;<span
+              class="font-normal text-primary-500"
+            >
               {{ tagname }}</span
             >
           </UITitle>

@@ -173,6 +173,7 @@
 
 <script setup lang="ts">
 import { useMainStore } from "@/stores/mainstore"
+
 const localePath = useLocalePath()
 
 const { defaultTransition } = useTailwindConfig()
@@ -193,7 +194,7 @@ const darkMode = computed(() => mainStore.getMode)
 
 const logout = async () => {
   const { error } = await client.auth.signOut()
-  navigateTo("/login")
+  navigateTo(localePath("/login"))
 }
 
 const toggleMenu = () => {

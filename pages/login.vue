@@ -32,13 +32,14 @@
 definePageMeta({
   layout: "auth",
 })
+const localePath = useLocalePath()
 
 const client = useSupabaseClient()
 const user = useSupabaseUser()
 
 watchEffect(() => {
   if (user.value) {
-    return navigateTo("/user")
+    return navigateTo(localePath("/user"))
   }
 })
 

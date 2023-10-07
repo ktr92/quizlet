@@ -114,6 +114,7 @@ const remove = (index: number) => {
 const count = computed(() => {
   return newitems.value.length
 })
+const localePath = useLocalePath()
 
 const resTitle = computed(() => {
   return course.value ? course.value.title : ""
@@ -182,7 +183,7 @@ const onSubmit = handleSubmit(async () => {
     },
   })
 
-  navigateTo("/user/courses/")
+  navigateTo(localePath("/user/courses/"))
 }, failValidation)
 
 const isLoading = ref(false)
