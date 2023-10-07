@@ -27,11 +27,11 @@
     <div>
       <UIProgress :value="barWidthCalculated" />
       <div v-if="falseItems?.length">
-        <h3 class="text-xl font-bold text-red-400">Wrong answers</h3>
+        <h3 class="text-xl font-bold text-red-400">{{ $t("wrong") }}</h3>
         <UITable :items="falseItems"></UITable>
       </div>
       <div v-if="trueItems?.length">
-        <h3 class="text-xl font-bold text-[#08BB3C]">Right answers</h3>
+        <h3 class="text-xl font-bold text-[#08BB3C]">{{ $t("valid") }}</h3>
         <UITable :items="trueItems"></UITable>
       </div>
     </div>

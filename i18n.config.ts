@@ -32,6 +32,8 @@ export default defineI18nConfig(() => ({
       changeside: "Change side",
       check: "Check",
       coursesby: "Modules by",
+      wrong: "Wrong answers",
+      valid: "Right answersы",
     },
     ru: {
       createcourse: "Создать модуль",
@@ -63,6 +65,8 @@ export default defineI18nConfig(() => ({
       changeside: "Перевернуть",
       check: "Проверить",
       coursesby: "Модули с тегом",
+      valid: "Изученные термины",
+      wrong: "Неизученные термины",
     },
   },
 }))

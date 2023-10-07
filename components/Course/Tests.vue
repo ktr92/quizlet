@@ -18,8 +18,7 @@
             {{ frontSide ? currentItemDD : currentItemDT }}
           </div>
         </div>
-
-        <div class="flex flex-wrap">
+        <div class="container flex flex-wrap">
           <div
             class="w-full md:w-[50%] p-2"
             v-for="option in options"
@@ -27,7 +26,10 @@
           >
             <div
               class="p-2 md:-4 shadow rounded bg-white dark:bg-primary-800 dark:text-white cursor-pointer hover:shadow-lg text-xs sm:text-base"
-              :class="defaultTransition"
+              :class="[
+                defaultTransition,
+                { shake: isvalid && option.dt === currentItemDT },
+              ]"
               @click="checkAnswer(option)"
               v-if="!answered || option.dt === currentItemDT"
             >
@@ -39,7 +41,10 @@
                 - {{ frontSide ? option.dd : option.dt }}</span
               >
             </div>
-            <div v-else class="text-gray-400 text-sm md:text-md">
+            <div
+              v-else
+              class="p-2 md:-4 shadow-sm rounded bg-transparent dark:bg-primary-800 dark:text-white cursor-pointer text-xs sm:text-base text-gray-400 font-bold text-sm md:text-md"
+            >
               {{ frontSide ? option.dt : option.dd }}
             </div>
           </div>
@@ -73,6 +78,9 @@
 </template>
 
 <script setup lang="ts">
+import timeout from "@/utils/timeout"
+import { time } from "console"
+
 const props = defineProps({
   items: {
     type: Array<ICard>,
@@ -161,13 +169,15 @@ function changeStep() {
   options.value = useShuffle(options.value)
 }
 
-const checkAnswer = (option: ICard) => {
+const checkAnswer = async (option: ICard) => {
   if (!answered.value) {
     answered.value = true
 
     if (option.dt === currentItemDT.value) {
       isvalid.value = true
       answered.value = false
+      await timeout(500)
+
       makeknown()
       changeStep()
     } else {
@@ -195,4 +205,28 @@ const randomize = () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.shake {
+  animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  @apply bg-green-500 text-white;
+}
+@keyframes valid {
+  10%,
+  90% {
+    transform: scale(1.02);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: scale(1.03);
+  }
+
+  40%,
+  60% {
+    transform: scale(1.05);
+  }
+}
+</style>
