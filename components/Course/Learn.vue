@@ -197,7 +197,7 @@ const randomize = () => {
 </script>
 
 <style scoped>
-.valid ::v-deep input {
+.valid:deep(input) {
   animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   backface-visibility: hidden;
   transition: all 0.2s ease;

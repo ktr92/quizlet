@@ -20,6 +20,7 @@
           <div
             v-if="!flipped"
             class="absolute text-center py-16 bg-primary-500 dark:bg-primary-800 text-white overflow-hidden inset-0 rounded-lg shadow-lg animated flipInX flashcard w-full mx-auto flex items-center justify-center"
+            :class="{ valid: isknown, invalid: isunknown }"
             @click="flip"
           >
             <div class="text-lg md:text-5xl">
@@ -120,7 +121,7 @@ const props = defineProps({
     required: true,
   },
 })
-
+import timeout from "@/utils/timeout"
 import { useMainStore } from "@/stores/mainstore"
 const mainStore = useMainStore()
 
@@ -135,7 +136,8 @@ const flipped = ref(false)
 const flip = () => {
   flipped.value = !flipped.value
 }
-
+let isknown = ref(false)
+let isunknown = ref(false)
 let current = ref(0)
 let count = ref(0)
 const isFinish = ref(false)
@@ -186,22 +188,28 @@ watch(count, (newValue, oldValue) => {
   }
 })
 
-const nextcard = () => {
+const nextcard = async () => {
+  isunknown.value = true
+  await timeout(500)
   falseItems.value.push(currentItem.value)
   current.value += 1
   count.value += 1
   flipped.value = false
+  isunknown.value = false
 }
 
 const trueItems = computed(() => {
   return useDifference(props.items, falseItems.value)
 })
 
-const makeknown = () => {
+const makeknown = async () => {
+  isknown.value = true
+  await timeout(500)
   restItems.value.splice(current.value, 1)
   /*  changeCurrent() */
   count.value += 1
   flipped.value = false
+  isknown.value = false
 }
 
 const randomize = () => {
@@ -240,5 +248,36 @@ const randomize = () => {
 .flipInX {
   backface-visibility: visible !important;
   animation-name: flipInX;
+}
+
+.valid {
+  animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  @apply bg-green-600;
+}
+@keyframes valid {
+  10%,
+  90% {
+    transform: scale(1.02);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: scale(1.03);
+  }
+
+  40%,
+  60% {
+    transform: scale(1.05);
+  }
+}
+
+.invalid {
+  animation: valid 0.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  @apply bg-red-400;
 }
 </style>
