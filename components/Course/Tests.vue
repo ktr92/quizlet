@@ -50,12 +50,12 @@
           class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
         >
           <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
-            <UIIconbutton @some-event="randomize" tooltip="Random">
+            <UIIconbutton @some-event="randomize" :tooltip="$t('randomize')">
               <Icon name="uil:arrow-random" size="30" />
             </UIIconbutton>
           </div>
           <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-            <UIIconbutton @some-event="changeSide" tooltip="changeSide">
+            <UIIconbutton @some-event="changeSide" :tooltip="$t('changeside')">
               <Icon name="eva:flip-2-fill" size="30" />
             </UIIconbutton>
           </div>

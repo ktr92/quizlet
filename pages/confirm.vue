@@ -12,5 +12,5 @@ watch(
 )
 </script>
 <template>
-  <div>Waiting for login...</div>
+  <div>{{ $t("loginprocess") }}</div>
 </template>

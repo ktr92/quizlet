@@ -14,10 +14,13 @@
           <Errors :errors="someError + error" />
         </template>
         <template v-else>
-          <UITitle> Your courses: </UITitle>
+          <UITitle>{{ $t("modules") }}</UITitle>
           <template v-if="courses && courses.length">
             <div v-for="card in courses" class="w-full relative">
-              <NuxtLink :to="'/user/course/' + card.id" class="cursor-pointer">
+              <NuxtLink
+                :to="localePath(`/user/course/${card.id}`)"
+                class="cursor-pointer"
+              >
                 <UIItem
                   :tags="card.tags"
                   :title="card.title"
@@ -79,6 +82,7 @@
 definePageMeta({
   middleware: ["auth"],
 })
+const localePath = useLocalePath()
 
 const user = useSupabaseUser()
 

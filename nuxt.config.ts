@@ -18,8 +18,18 @@ export default defineNuxtConfig({
     ],
   },
   i18n: {
-    locales: ["en", "ru"], // used in URL path prefix
-    defaultLocale: "ru", // default locale of your project for Nuxt pages and routings
+    strategy: "prefix_except_default",
+    defaultLocale: "ru",
+    locales: [
+      {
+        code: "ru",
+        name: "RUS",
+      },
+      {
+        code: "en",
+        name: "ENG",
+      },
+    ], // used in URL path prefix
   },
   supabase: {
     redirect: false,

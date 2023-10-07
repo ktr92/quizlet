@@ -4,13 +4,13 @@
       <div
         class="md:text-5xl text-primary-800 dark:text-white font-bold flex justify-between items-center"
       >
-        <UITitle> Creating a new course </UITitle>
+        <UITitle> {{ $t("creatingmodule") }} </UITitle>
         <div class="flex items-center">
           <div class="ml-1 md:ml-4">
             <label for="fileupload">
               <UIIconbutton
                 @some-event="importItem"
-                tooltip="Import"
+                :tooltip="$t('import')"
                 classes="mr-4 w-12 h-12 md:!p-0 flex items-center justify-center"
                 type="round"
               >
@@ -30,7 +30,7 @@
             :rounded="true"
             @click="onSubmit"
             v-if="!isLoading && !someError.length"
-            >Create</UIButton
+            >{{ $t("create") }}</UIButton
           >
         </div>
         <!-- /.flex -->
@@ -48,7 +48,7 @@
         <form @submit="onSubmit">
           <UIInput
             v-model="ctitle"
-            placeholder="Course title"
+            :placeholder="$t('coursetitle')"
             name="ctitle"
           ></UIInput>
 
@@ -78,7 +78,7 @@
                   <UIInput
                     :key="field.id"
                     v-model="newitems[index].dt"
-                    placeholder="Term"
+                    :placeholder="$t('term')"
                     :name="`newitems[${index}].dt`"
                   ></UIInput>
                 </div>
@@ -86,7 +86,7 @@
                   <UIInput
                     :key="field.id"
                     v-model="newitems[index].dd"
-                    placeholder="Value"
+                    :placeholder="$t('value')"
                     :name="`newitems[${index}].dd`"
                   ></UIInput>
                 </div>
@@ -94,9 +94,9 @@
             </div>
           </div>
           <div class="my-8" @click="addnew">
-            <UIButton :liquid="true" :rounded="true" type="clear"
-              >Add new word</UIButton
-            >
+            <UIButton :liquid="true" :rounded="true" type="clear">{{
+              $t("addword")
+            }}</UIButton>
           </div>
         </form>
       </template>

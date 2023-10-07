@@ -12,7 +12,7 @@
           @some-event="iscomponent = false"
           bg="#efadad"
           bghover=""
-          tooltip="Back"
+          :tooltip="$t('back')"
         >
           <Icon name="eva:arrow-back-outline" size="30" />
         </UIIconbutton>
@@ -30,7 +30,7 @@
               @some-event="exportItem"
               bg="#efadad"
               bghover=""
-              tooltip="Export"
+              :tooltip="$t('export')"
             >
               <Icon name="bx:export" size="30" />
             </UIIconbutton>
@@ -50,7 +50,7 @@
               @some-event="editItem"
               bg="#efadad"
               bghover=""
-              tooltip="Edit"
+              :tooltip="$t('edit')"
             >
               <Icon name="ep:edit" size="30" />
             </UIIconbutton>
@@ -60,7 +60,7 @@
               @some-event="removeItem"
               bg="#efadad"
               bghover=""
-              tooltip="Remove"
+              :tooltip="$t('remove')"
             >
               <Icon name="fluent:delete-48-regular" size="30" />
             </UIIconbutton>
@@ -73,21 +73,21 @@
         v-if="!iscomponent"
       >
         <UIIconlink
-          title="Карточки"
+          :title="$t('cards')"
           icon=""
           @click="showCards"
           class="md:mr-1 mb-2 md:mr-4 w-full md:w-auto md:flex-1"
           :is-active="iscomponent === ('cards' || 'default')"
         ></UIIconlink>
         <UIIconlink
-          title="Запоминание"
+          :title="$t('spelling')"
           icon=""
           @click="showLearn"
           class="md:mx-1 mb-2 md:mx-4 w-full md:w-auto md:flex-1"
           :is-active="iscomponent === 'learn'"
         ></UIIconlink>
         <UIIconlink
-          title="Тест"
+          :title="$t('test')"
           icon=""
           @click="showTests"
           class="md:ml-1 mb-2 md:ml-4 w-full md:w-auto md:flex-1"

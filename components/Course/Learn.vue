@@ -35,12 +35,15 @@
             class="flex max-auto my-2 md:my-2 justify-center text-white text-xl items-center"
           >
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 1">
-              <UIIconbutton @some-event="randomize" tooltip="Random">
+              <UIIconbutton @some-event="randomize" :tooltip="$t('randomize')">
                 <Icon name="uil:arrow-random" size="30" />
               </UIIconbutton>
             </div>
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-              <UIIconbutton @some-event="changeSide" tooltip="Change Side">
+              <UIIconbutton
+                @some-event="changeSide"
+                :tooltip="$t('changeside')"
+              >
                 <Icon name="eva:flip-2-fill" size="30" />
               </UIIconbutton>
             </div>
@@ -62,7 +65,7 @@
                 @some-event="skipcard"
                 bg="#efadad"
                 bghover=""
-                tooltip="Skip"
+                :tooltip="$t('skip')"
               >
                 <Icon name="fluent:skip-forward-tab-24-regular" size="30" />
               </UIIconbutton>
@@ -72,7 +75,7 @@
                 @some-event="nextcard"
                 bg="#c4eac4"
                 bghover=""
-                tooltip="Check"
+                :tooltip="$t('check')"
               >
                 <Icon name="heroicons-solid:check" size="30" />
               </UIIconbutton>

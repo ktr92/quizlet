@@ -3,9 +3,9 @@
     <div v-if="isFinish">
       <CourseNavigation
         :condition2="!!restItems.length"
-        :trueItems='trueItems'
-        :falseItems='falseItems'
-        :count='items.length'
+        :trueItems="trueItems"
+        :falseItems="falseItems"
+        :count="items.length"
         @some-event1="restart"
         @some-event2="learnmore"
         text1="Начать заново"
@@ -45,13 +45,16 @@
                 @some-event="randomize"
                 bg="#efadad"
                 bghover=""
-                tooltip="Randomize"
+                :tooltip="$t('randomize')"
               >
                 <Icon name="uil:arrow-random" size="30" />
               </UIIconbutton>
             </div>
             <div class="mr-2 md:mr-4" v-if="initialItems.length > 0">
-              <UIIconbutton @some-event="changeSide" tooltip="Change side">
+              <UIIconbutton
+                @some-event="changeSide"
+                :tooltip="$t('changeside')"
+              >
                 <Icon name="eva:flip-2-fill" size="30" />
               </UIIconbutton>
             </div>
@@ -65,12 +68,17 @@
             </div>
           </div>
 
-
-           <div
+          <div
             class="flex max-auto my-2 md:my-2 justify-center dark:text-white text-xl items-center"
           >
             <div class="mx-2 md:mx-4">
-             <span class="text-[#08BB3C] font-bold">{{  count - falseItems.length }}</span>  / <span class="font-bold text-[#F1350D]">{{ falseItems.length }}</span> 
+              <span class="text-[#08BB3C] font-bold">{{
+                count - falseItems.length
+              }}</span>
+              /
+              <span class="font-bold text-[#F1350D]">{{
+                falseItems.length
+              }}</span>
             </div>
           </div>
 
@@ -82,7 +90,7 @@
                 @some-event="nextcard"
                 bg="#efadad"
                 bghover=""
-                tooltip="Don't know"
+                :tooltip="$t('dontknow')"
               >
                 <Icon name="gg:close" size="30" />
               </UIIconbutton>
@@ -92,7 +100,7 @@
                 @some-event="makeknown"
                 bg="#c4eac4"
                 bghover=""
-                tooltip="Know"
+                :tooltip="$t('know')"
               >
                 <Icon name="heroicons-solid:check" size="30" />
               </UIIconbutton>
@@ -186,7 +194,7 @@ const nextcard = () => {
 }
 
 const trueItems = computed(() => {
-  return  useDifference(props.items, falseItems.value)
+  return useDifference(props.items, falseItems.value)
 })
 
 const makeknown = () => {

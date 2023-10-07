@@ -1,8 +1,11 @@
 <template>
   <div>
-    <UITitle> Your tags: </UITitle>
+    <UITitle>{{ $t("tags") }}</UITitle>
     <div v-for="tag in tags" class="w-full">
-      <NuxtLink :to="'/user/tag/' + tag.title" class="cursor-pointer">
+      <NuxtLink
+        :to="localePath(`/user/tag/${tag.title}`)"
+        class="cursor-pointer"
+      >
         <UIItem :title="tag.title"></UIItem>
         <!-- <div
           class="mx-2 my-2 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-700 dark:border-gray-700"
@@ -23,6 +26,7 @@ definePageMeta({
   middleware: ["auth"],
 })
 /* const tags = ["movie", "phrasal"] */
+const localePath = useLocalePath()
 
 const user = useSupabaseUser()
 

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <NuxtLink :to="props.url" class="cursor-pointer">
+    <NuxtLink :to="localePath(String(props.url))" class="cursor-pointer">
       <UIItem
         :title="props.title"
         :count="props.count"
@@ -12,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const props = defineProps({
   url: {
     type: String,

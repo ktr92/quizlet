@@ -1,12 +1,16 @@
 <template>
   <div>
     <UIItemLink
-      title="Create a new course"
+      :title="$t('createcourse')"
       url="/user/add"
       type="button"
     ></UIItemLink>
-    <UIItemLink title="Courses" url="/user/courses" :count="count"></UIItemLink>
-    <UIItemLink title="Tags" url="/user/tags"></UIItemLink>
+    <UIItemLink
+      :title="$t('modules')"
+      url="/user/courses"
+      :count="count"
+    ></UIItemLink>
+    <UIItemLink :title="$t('tags')" url="/user/tags"></UIItemLink>
   </div>
 </template>
 

@@ -12,24 +12,24 @@
               <ul class="-mx-4 flex items-center">
                 <li class="px-4">
                   <NuxtLink
-                    to="/user/add/"
+                    :to="localePath('/user/add/')"
                     class="text-white focus:ring-4 !outline-none focus:!outline-none font-medium px-[15px] py-1 md:py-[10px] text-md text-center cursor-pointer whitespace-nowrap bg-primary-600 text-white dark:bg-primary-500 hover:bg-primary-300 rounded"
                   >
-                    Create course
+                    {{ $t("createcourse") }}
                   </NuxtLink>
                 </li>
                 <li class="px-4">
                   <NuxtLink
                     class="text-primary-900 dark:text-white"
-                    to="/user/courses/"
-                    >Courses</NuxtLink
+                    :to="localePath('/user/courses/')"
+                    >{{ $t("modules") }}</NuxtLink
                   >
                 </li>
                 <li class="px-4">
                   <NuxtLink
                     class="text-primary-900 dark:text-white"
-                    to="/user/tags/"
-                    >Tags</NuxtLink
+                    :to="localePath('/user/tags/')"
+                    >{{ $t("tags") }}</NuxtLink
                   >
                 </li>
               </ul>
@@ -83,6 +83,8 @@
             >
           </NuxtLink> -->
           <div class="flex items-center lg:order-2">
+            <Language />
+
             <UIIconbutton
               class="mr-4 coursor-pointer"
               @some-event="changeMode"
@@ -100,19 +102,17 @@
                 size="22"
               ></Icon>
             </UIIconbutton>
-            <Language />
-            <p>{{ $t("welcome") }}</p>
 
             <NuxtLink
               v-if="!user"
               :class="defaultTransition"
-              to="/login"
+              :to="localePath('/login')"
               class="text-white bg-[#423ed8] hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-              >Log in</NuxtLink
+              >{{ $t("login") }}</NuxtLink
             >
             <div v-else class="flex items-center">
               <NuxtLink
-                to="/user"
+                :to="localePath('/user')"
                 class="text-primary-200 dark:text-white mr-4"
               >
                 <div class="flex items-center">
@@ -131,7 +131,7 @@
                 class="text-white bg-[#423ed8] hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 whitespace-nowrap"
                 :class="defaultTransition"
               >
-                Sign Out
+                {{ $t("signout") }}
               </button>
             </div>
           </div>
@@ -144,21 +144,23 @@
             <ul class="-mx-4 pt-4">
               <li class="px-4 mb-4">
                 <UIButton class="rounded">
-                  <NuxtLink to="/user/add/">Create course</NuxtLink>
+                  <NuxtLink :to="localePath('/user/add/')">{{
+                    $t("createcourse")
+                  }}</NuxtLink>
                 </UIButton>
               </li>
               <li class="px-4 mb-4">
                 <NuxtLink
                   class="text-primary-900 dark:text-white"
-                  to="/user/courses/"
-                  >Courses</NuxtLink
+                  :to="localePath('/user/courses/')"
+                  >{{ $t("modules") }}</NuxtLink
                 >
               </li>
               <li class="px-4 mb-2">
                 <NuxtLink
                   class="text-primary-900 dark:text-white"
-                  to="/user/tags/"
-                  >Tags</NuxtLink
+                  :to="localePath('/user/tags/')"
+                  >{{ $t("tags") }}</NuxtLink
                 >
               </li>
             </ul>
@@ -171,6 +173,7 @@
 
 <script setup lang="ts">
 import { useMainStore } from "@/stores/mainstore"
+const localePath = useLocalePath()
 
 const { defaultTransition } = useTailwindConfig()
 const menuexpanded = ref(false)

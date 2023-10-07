@@ -5,7 +5,7 @@
       bg="#efadad"
       bghover=""
       type=""
-      tooltip="Back"
+      :tooltip="$t('back')"
       classes="mr-4 w-12 h-12 md:!p-0 flex items-center justify-center"
     >
       <Icon name="eva:arrow-back-outline" size="30" />

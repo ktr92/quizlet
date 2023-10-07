@@ -18,7 +18,7 @@
         >
           <div v-for="tag in props.tags" :key="tag.tag_id">
             <NuxtLink
-              :to="'/user/tag/' + tag.tags.tag_title"
+              :to="localePath(`/user/tag/${tag.tags.tag_title}`)"
               class="cursor-pointer bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white"
               >{{ tag.tags.tag_title }}</NuxtLink
             >
@@ -30,6 +30,8 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const props = defineProps({
   title: {
     type: String,

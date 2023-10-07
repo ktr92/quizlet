@@ -1,6 +1,6 @@
 <template>
   <div class="mx-4">
-    <form>
+    <!--  <form>
       <select
         v-model="locale"
         id="countries"
@@ -9,10 +9,21 @@
         <option value="ru">RU</option>
         <option value="en">EN</option>
       </select>
-    </form>
+    </form> -->
+    <NuxtLink
+      v-for="locale in availableLocales"
+      :key="locale.code"
+      :to="switchLocalePath(locale.code)"
+      >{{ locale.name }}</NuxtLink
+    >
   </div>
 </template>
 
 <script setup>
-const { locale } = useI18n()
+const { locale, locales } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+
+const availableLocales = computed(() => {
+  return locales.value.filter((i) => i.code !== locale.value)
+})
 </script>

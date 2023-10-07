@@ -20,7 +20,10 @@
             >
           </UITitle>
           <div v-for="card in courses" class="w-full">
-            <NuxtLink :to="'/user/course/' + card.id" class="cursor-pointer">
+            <NuxtLink
+              :to="localePath(`/user/course/${card.id}`)"
+              class="cursor-pointer"
+            >
               <UIItem
                 :tags="card.tags"
                 :title="card.title"
@@ -66,6 +69,7 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router"
+const localePath = useLocalePath()
 
 definePageMeta({
   middleware: ["auth"],
