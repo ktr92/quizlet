@@ -52,7 +52,7 @@ const auth = async (prov: any) => {
         prompt: 'consent',
       },
      /*  redirectTo: "/confirm", */
-        redirectTo: "wordcard://confirm",
+        /* redirectTo: "wordcard://confirm", */
     },
   })
 }
