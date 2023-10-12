@@ -15,7 +15,7 @@
             </h1>
 
             <button
-              @click="auth('google')"
+              @click="onSignInWithGoogle('google')"
               class="flex items-center justify-center gap-3 p-1.5 w-full bg-gray-100 hover:bg-gray-200 rounded-full text-lg font-semibold transition ease-in-out duration-350 dark:bg-gray-900 dark:hover:bg-primary-900 focus:bg-gray-200 dark:focus"
             >
               <img src="/google-logo.svg" alt="" class="w-8" />
@@ -43,7 +43,7 @@ watchEffect(() => {
   }
 })
 
-const auth = async (prov: any) => {
+const getGoogleOAuthUrl  = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
@@ -51,12 +51,63 @@ const auth = async (prov: any) => {
         access_type: 'offline',
         prompt: 'consent',
       },
-     /*  redirectTo: "/confirm", */
         redirectTo: "wordcard://confirm",
     },
   })
+  return data.url
 }
 
+ const setOAuthSession = async (tokens: {
+   access_token: string;
+   refresh_token: string;
+ }) => {
+   const { data, error } = await client.auth.setSession({
+     access_token: tokens.access_token,
+     refresh_token: tokens.refresh_token,
+   });
+
+   if (error) throw error;
+
+ };
+
+const onSignInWithGoogle = async (prov: any) => {
+   try {
+     const url = await getGoogleOAuthUrl(prov);
+     if (!url) return;
+ 
+   
+ 
+     if (url.length ) {
+       const data = extractParamsFromUrl(url);
+
+       if (!data.access_token || !data.refresh_token) return;
+
+      setOAuthSession({
+         access_token: data.access_token,
+         refresh_token: data.refresh_token,
+       });
+
+      
+     }
+   } catch (error) {
+     // Handle error here
+     console.log(error);
+   } finally {
+   }
+ };
+
+const extractParamsFromUrl = (url: string) => {
+   const params = new URLSearchParams(url.split("#")[1]);
+   const data = {
+     access_token: params.get("access_token"),
+     expires_in: parseInt(params.get("expires_in") || "0"),
+     refresh_token: params.get("refresh_token"),
+     token_type: params.get("token_type"),
+     provider_token: params.get("provider_token"),
+   };
+
+  return data;
+ };
 
 </script>
 
