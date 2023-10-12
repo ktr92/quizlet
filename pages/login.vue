@@ -47,11 +47,17 @@ const auth = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
+      },
      /*  redirectTo: "/confirm", */
         redirectTo: "wordcard://confirm",
     },
   })
 }
+
+
 </script>
 
 <style scoped></style>
