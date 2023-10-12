@@ -2,7 +2,7 @@
 const user = useSupabaseUser()
 const localePath = useLocalePath()
 
-watch(
+/* watch(
   user,
   () => {
     if (user.value) {
@@ -10,7 +10,7 @@ watch(
     }
   },
   { immediate: true }
-)
+) */
 </script>
 <template>
   <div>{{ $t("loginprocess") }}</div>
