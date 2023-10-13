@@ -44,6 +44,7 @@ watchEffect(() => {
 })
 
 const getGoogleOAuthUrl  = async (prov: any) => {
+
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
@@ -51,7 +52,7 @@ const getGoogleOAuthUrl  = async (prov: any) => {
         access_type: 'offline',
         prompt: 'consent',
       },
-        redirectTo: "wordcard://confirm",
+        redirectTo: "wordcard.pro://confirm",
     },
   })
   return data.url
@@ -72,12 +73,13 @@ const getGoogleOAuthUrl  = async (prov: any) => {
 
 const onSignInWithGoogle = async (prov: any) => {
    try {
+ 
+
      const url = await getGoogleOAuthUrl(prov);
-     if (!url) return;
  
-   
+    
  
-     if (url.length ) {
+     if (url?.length ) {
        const data = extractParamsFromUrl(url);
 
        if (!data.access_token || !data.refresh_token) return;

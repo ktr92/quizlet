@@ -1,8 +1,10 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 const localePath = useLocalePath()
-
-watch(
+onMounted(() => {
+  console.log()
+})
+/* watch(
   user,
   () => {
     if (user.value) {
@@ -10,7 +12,7 @@ watch(
     }
   },
   { immediate: true }
-)
+) */
 </script>
 <template>
   <div>{{ $t("loginprocess") }}</div>

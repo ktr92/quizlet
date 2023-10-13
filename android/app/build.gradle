@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "nuxt.app"
+    namespace "wordcard.pro"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "nuxt.app"
+        applicationId "wordcard.pro"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

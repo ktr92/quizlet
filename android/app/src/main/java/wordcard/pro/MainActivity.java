@@ -1,4 +1,4 @@
-package nuxt.app;
+package wordcard.pro;
 
 import com.getcapacitor.BridgeActivity;
 
