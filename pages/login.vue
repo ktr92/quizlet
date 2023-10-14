@@ -53,7 +53,7 @@ const getGoogleOAuthUrl  = async (prov: any) => {
         access_type: 'offline',
         prompt: 'consent',
       },
-        redirectTo: "wordcard.pro://confirm",
+        redirectTo: "wordcard://confirm",
     },
   })
   return data.url
