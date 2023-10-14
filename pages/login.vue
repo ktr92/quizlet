@@ -48,6 +48,8 @@ const getGoogleOAuthUrl  = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
+      skipBrowserRedirect: true,
+
       queryParams: {
         access_type: 'offline',
         prompt: 'consent',
