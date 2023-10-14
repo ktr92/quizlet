@@ -25,7 +25,11 @@
 
 
           <div class='my-2'>
-            <a href='wordcard.pro://confirm'>Confirm</a>
+            <UIButton class="rounded">
+                  <NuxtLink :to="localePath('wordcard.pro://confirm')">{{
+                    $t("createcourse")
+                  }}</NuxtLink>
+                </UIButton>
           </div>
         </div>
       </div>
