@@ -51,7 +51,6 @@ const getGoogleOAuthUrl  = async (prov: any) => {
 
       queryParams: {
         access_type: 'offline',
-        prompt: 'consent',
       },
         redirectTo: "wordcard.pro://confirm",
     },
