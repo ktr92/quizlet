@@ -7,7 +7,7 @@ const client = useSupabaseClient()
     return navigateTo('/login')
   }  */
 
-  const { searchParams } = new URL(from.fullPath)
+  const { searchParams } = new URL(from.path)
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/'
 
@@ -16,7 +16,7 @@ const client = useSupabaseClient()
     const supabase = createRouteHandlerClient({ cookies: () => cookieStore }) */
     const { error } = await client.auth.exchangeCodeForSession(code)
     if (!error) {
-      return navigateTo(new URL(`/${next.slice(1)}`, to.fullPath))
+      return navigateTo(new URL(`/${next.slice(1)}`, to.path))
     }
   }
 
