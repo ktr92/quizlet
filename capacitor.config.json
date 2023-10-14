@@ -3,7 +3,7 @@
   "appName": "wordcard",
   "webDir": "dist",
   "server": {
-    "androidScheme": "wordcard.pro"
+    "androidScheme": "https"
   },
   "plugins": {
     "CapacitorCookies": {
