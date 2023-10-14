@@ -9,5 +9,8 @@
 		"CapacitorCookies": {
 			"enabled": true
 		}
+	},
+	"deepLinks": {
+		"scheme": "wordcard.pro"
 	}
 }
