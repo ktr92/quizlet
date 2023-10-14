@@ -26,7 +26,7 @@
 
           <div class='my-2'>
             <UIButton class="rounded">
-                  <NuxtLink :to="localePath('wordcard.pro://confirm')">{{
+                  <NuxtLink :to="localePath('/user/courses/')">{{
                     $t("createcourse")
                   }}</NuxtLink>
                 </UIButton>
@@ -66,7 +66,7 @@ const onSignInWithGoogle = async (prov: any) => {
         access_type: 'offline',
         prompt: 'consent',
       },
-        redirectTo: "http://localhost:3000/confirm",
+        redirectTo: "wordcard.pro://confirm",
     },
   })
   
