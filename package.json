@@ -30,6 +30,7 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@pinia/nuxt": "^0.4.11",
     "@prisma/client": "^5.1.1",
+    "@supabase/gotrue-js": "^2.46.1",
     "nuxt-icon": "^0.4.2",
     "nuxt-lodash": "^2.5.0",
     "pinia": "^2.1.6",
