@@ -2,8 +2,8 @@
 	"appId": "com.wordcard.app",
 	"appName": "wordcard",
 	"webDir": "dist",
-	"scheme": "com.wordcard.app",
+	"scheme": "wordcard",
 	"deepLinks": {
-		"scheme": "com.wordcard.app"
+		"scheme": "wordcard"
 	}
 }
