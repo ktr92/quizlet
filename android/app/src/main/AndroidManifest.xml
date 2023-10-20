@@ -17,14 +17,11 @@
             android:launchMode="singleTask"
             android:exported="true">
 
-            <intent-filter android:autoVerify="true">
-               <!--  <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.BROWSABLE" /> -->
-                    <action android:name="android.intent.action.VIEW" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                    <category android:name="android.intent.category.BROWSABLE" />
-                    <data android:scheme="wordcard.pro" />
+             <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="wordcard" android:host="wordcard.app"/>
             </intent-filter>
 
         </activity>

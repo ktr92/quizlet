@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.wordcard.app",
+               "sha256_cert_fingerprints": ["D6:29:AB:44:6B:81:C4:D3:C8:35:C8:9B:90:43:70:87:04:A5:9A:62:3D:B9:07:38:E1:D2:AB:30:30:E8:8E:89"] }
+}]

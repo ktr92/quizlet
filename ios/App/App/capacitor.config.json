@@ -1,16 +1,9 @@
 {
-	"appId": "wordcard.pro",
+	"appId": "com.wordcard.app",
 	"appName": "wordcard",
 	"webDir": "dist",
-	"server": {
-		"androidScheme": "https"
-	},
-	"plugins": {
-		"CapacitorCookies": {
-			"enabled": true
-		}
-	},
+	"scheme": "com.wordcard.app",
 	"deepLinks": {
-		"scheme": "wordcard.pro"
+		"scheme": "com.wordcard.app"
 	}
 }

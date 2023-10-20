@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">wordcard</string>
     <string name="title_activity_main">wordcard</string>
-    <string name="package_name">wordcard.pro</string>
-    <string name="custom_url_scheme">wordcard.pro</string>
-    <string name="server_client_id">242893596595-mbquq6hhd4u8k86ee00mvlpccjeusmuh.apps.googleusercontent.com</string>
+    <string name="package_name">com.wordcard.app</string>
+    <string name="custom_url_scheme">com.wordcard.app</string>
 </resources>

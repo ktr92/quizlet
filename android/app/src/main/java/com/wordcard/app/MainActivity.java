@@ -1,4 +1,4 @@
-package wordcard.pro;
+package com.wordcard.app;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-
+  plugins: ["@/plugins/deeplinks.plugin.js"],
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
@@ -37,16 +37,16 @@ export default defineNuxtConfig({
     redirect: false,
     cookieOptions: {
       maxAge: 60 * 60 * 8,
-      sameSite: 'lax',
-      secure: true
+      sameSite: "lax",
+      secure: true,
     },
     clientOptions: {
       auth: {
-        flowType: 'pkce',
+        flowType: "pkce",
         detectSessionInUrl: true,
         persistSession: true,
-        autoRefreshToken: true
+        autoRefreshToken: true,
       },
-    }
+    },
   },
 })
