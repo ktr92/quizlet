@@ -38,6 +38,12 @@
 </template>
 
 <script setup lang="ts">
+import { Capacitor } from "@capacitor/core"
+
+const redirectTo = Capacitor.isNativePlatform()
+  ? process.env.NEXT_PUBLIC_REDIRECT_TO_NATIVE || "wordcard://"
+  : process.env.NEXT_PUBLIC_REDIRECT_TO ||
+    "https://snazzy-toffee-1129c6.netlify.app"
 definePageMeta({
   middleware: ["auth"],
 })
@@ -59,10 +65,10 @@ const onSignInWithGoogle = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
-      queryParams: {
+      /* queryParams: {
         access_type: "offline",
         prompt: "consent",
-      },
+      }, */
       redirectTo: "wordcard://",
     },
   })
