@@ -69,7 +69,7 @@ const onSignInWithGoogle = async (prov: any) => {
         access_type: "offline",
         prompt: "consent",
       }, */
-      redirectTo: "wordcard://",
+      redirectTo,
     },
   })
 }
