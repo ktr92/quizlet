@@ -9,7 +9,8 @@
     "postinstall": "nuxt prepare",
     "seed": "node prisma/seed.js",
     "ionic:build": "npm run build",
-    "ionic:serve": "npm run dev"
+    "ionic:serve": "npm run dev",
+    "app": "npm run generate && npx cap sync android && npx cap run android"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

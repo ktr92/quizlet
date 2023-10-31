@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-  plugins: ["@/plugins/deeplinks.plugin.js"],
+  /*   plugins: ["@/plugins/deeplinks.plugin.js"], */
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
