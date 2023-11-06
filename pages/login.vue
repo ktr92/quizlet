@@ -24,7 +24,7 @@
           </div>
 
           <div class="my-2">
-            <a href="wordcard://wordcard.app">LINK</a>
+            <a href="wordcard://wordcard.app/confirm">LINK</a>
             <!--   <UIButton class="rounded">
                   <NuxtLink :to="localePath('/confirm')">{{
                     $t("createcourse")
@@ -41,9 +41,10 @@
 import { Capacitor } from "@capacitor/core"
 
 const redirectTo = Capacitor.isNativePlatform()
-  ? process.env.NEXT_PUBLIC_REDIRECT_TO_NATIVE || "wordcard://"
-  : process.env.NEXT_PUBLIC_REDIRECT_TO ||
-    "https://snazzy-toffee-1129c6.netlify.app"
+  ? process.env.NEXT_PUBLIC_REDIRECT_TO_NATIVE ||
+    "wordcard://wordcard.app/confirm"
+  : process.env.NEXT_PUBLIC_REDIRECT_TO || "http://localhost:3000/confirm"
+/* "https://snazzy-toffee-1129c6.netlify.app" */
 definePageMeta({
   middleware: ["auth"],
 })

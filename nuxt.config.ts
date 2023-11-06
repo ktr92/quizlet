@@ -1,8 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  vite: {
+    optimizeDeps: {
+      exclude: ["date-fns"],
+    },
+  },
   ssr: false,
-  /*   plugins: ["@/plugins/deeplinks.plugin.js"], */
+  plugins: ["@/plugins/deeplinks.plugin.js"],
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",

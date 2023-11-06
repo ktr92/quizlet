@@ -62,16 +62,15 @@
           </template>
           <template v-else>
             <div class="text-2xl block mb-4">
-              <span class="block"
-                >The are no courses yet... You may create a new one right now
-              </span>
+              <span class="block">{{ $t("nocourses") }} </span>
             </div>
             <div>
               <UIButton
                 @onclick="navigateTo(localePath('add'))"
                 size="lg"
                 :rounded="true"
-                >Create course</UIButton
+                >{{ $t("createcourse") }}</UIButton
+              >
               >
             </div>
           </template>

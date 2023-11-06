@@ -2,7 +2,6 @@ export default defineI18nConfig(() => ({
   legacy: false,
   locale: "ru",
   messages: {
-   
     ru: {
       createcourse: "Создать модуль",
       tags: "Теги",
@@ -17,7 +16,7 @@ export default defineI18nConfig(() => ({
       coursetitle: "Название модуля",
       term: "Определение",
       value: "Значение",
-      tagsinput: "Добавиьте теги (необязательно)",
+      tagsinput: "Добавьте теги (необязательно)",
       import: "Импорт",
       cards: "Карточки",
       spelling: "Написание",
@@ -35,6 +34,7 @@ export default defineI18nConfig(() => ({
       coursesby: "Модули с тегом",
       valid: "Изученные термины",
       wrong: "Неизученные термины",
+      nocourses: "У вас пока нет модулей на изучении... Создайте прямо сейчас!",
     },
     en: {
       createcourse: "Create a module",
@@ -67,7 +67,8 @@ export default defineI18nConfig(() => ({
       check: "Next",
       coursesby: "Modules by",
       wrong: "Wrong answers",
-      valid: "Right answersы",
+      valid: "Right answers",
+      nocourses: "The are no courses yet... You may create a new one right now",
     },
   },
 }))
