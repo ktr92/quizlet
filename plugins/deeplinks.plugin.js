@@ -1,4 +1,4 @@
-import { App } from "@capacitor/app"
+/* import { App } from "@capacitor/app"
 import VueRouter from "vue-router"
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -18,3 +18,4 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   })
 })
+ */
