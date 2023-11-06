@@ -62,7 +62,7 @@
           </template>
           <template v-else>
             <div class="text-2xl block mb-4">
-              <span class="block">{{ $t("nocourses") }} </span>
+              <span class="block dark:text-white">{{ $t("nocourses") }} </span>
             </div>
             <div>
               <UIButton
