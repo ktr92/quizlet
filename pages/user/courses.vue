@@ -71,7 +71,6 @@
                 :rounded="true"
                 >{{ $t("createcourse") }}</UIButton
               >
-              >
             </div>
           </template>
         </template>
