@@ -24,12 +24,12 @@
           </div>
 
           <div class="my-2">
-            <!--    <a href="wordcard://wordcard.app/confirm">LINK</a> -->
-            <!--   <UIButton class="rounded">
+               <a href="wordcard://wordcard.app/confirm">LINK</a>
+              <UIButton class="rounded">
                   <NuxtLink :to="localePath('/confirm')">{{
                     $t("createcourse")
                   }}</NuxtLink>
-                </UIButton> -->
+                </UIButton>
           </div>
         </div>
       </div>
@@ -66,13 +66,20 @@ const onSignInWithGoogle = async (prov: any) => {
   const { data, error } = await client.auth.signInWithOAuth({
     provider: prov,
     options: {
-      /* queryParams: {
+      queryParams: {
         access_type: "offline",
         prompt: "consent",
-      }, */
+      },
       redirectTo,
     },
   })
+
+  const result = await user.openAuthSessionAsync(
+    URL,
+    "wordcard://wordcard.app/confirm?",
+    { showInRecents: true }
+  );
+  
 }
 </script>
 

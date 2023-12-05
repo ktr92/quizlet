@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     },
   },
   ssr: false,
-  /*  plugins: ["@/plugins/deeplinks.plugin.js"], */
+   plugins: ["@/plugins/deeplinks.plugin.js"],
   modules: [
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
@@ -38,19 +38,6 @@ export default defineNuxtConfig({
     ], // used in URL path prefix
   },
   supabase: {
-    redirect: false,
-    cookieOptions: {
-      maxAge: 60 * 60 * 8,
-      sameSite: "lax",
-      secure: true,
-    },
-    clientOptions: {
-      auth: {
-        flowType: "pkce",
-        detectSessionInUrl: true,
-        persistSession: true,
-        autoRefreshToken: true,
-      },
-    },
+   
   },
 })
