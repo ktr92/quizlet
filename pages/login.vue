@@ -74,11 +74,6 @@ const onSignInWithGoogle = async (prov: any) => {
     },
   })
 
-  const result = await user.openAuthSessionAsync(
-    URL,
-    "wordcard://wordcard.app/confirm?",
-    { showInRecents: true }
-  );
   
 }
 </script>
